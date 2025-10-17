@@ -1,4 +1,4 @@
-# 🎮 GameZone - Gaming Accessories E-Commerce
+#  GameZone - Gaming Accessories E-Commerce
 
 <div align="center">
   
@@ -10,21 +10,21 @@ A modern, professional e-commerce website for gaming accessories featuring a stu
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🎨 **Modern UI/UX Design**
+###  **Modern UI/UX Design**
 - Dark theme optimized for gaming aesthetics
 - Cyan and purple accent colors with gradient effects
 - Smooth animations and transitions throughout
 - Fully responsive layout
 
-### 🌟 **Interactive Components**
+###  **Interactive Components**
 - **Animated Hero Banner** - Eye-catching section with glowing border effects and floating image animation
 - **Dynamic Categories** - Glowing category buttons with dropdown menus
 - **Product Cards** - Hover effects with elevation and glow
 - **Stats Display** - Showcasing 10K+ gamers, 500+ products, and 4.9★ rating
 
-### ⚡ **Performance**
+###  **Performance**
 - No frameworks or dependencies - Pure HTML/CSS
 - Optimized images loaded locally
 - Fast page load times
@@ -32,7 +32,7 @@ A modern, professional e-commerce website for gaming accessories featuring a stu
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -47,17 +47,17 @@ A modern, professional e-commerce website for gaming accessories featuring a stu
 
 ---
 
-## 🎯 Product Categories
+##  Product Categories
 
-- ⌨️ **Keyboards** - Mechanical & Membrane
-- 🎧 **Gaming Headsets** - Wired & Wireless  
-- 🕹️ **Controllers** - Xbox, PlayStation, Switch
-- 🖱️ **Gaming Mice** - Wired, Wireless, RGB
-- 🎴 **Graphics Cards** - High-performance GPUs
+-  **Keyboards** - Mechanical & Membrane
+-  **Gaming Headsets** - Wired & Wireless  
+-  **Controllers** - Xbox, PlayStation, Switch
+-  **Gaming Mice** - Wired, Wireless, RGB
+-  **Graphics Cards** - High-performance GPUs
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Any modern web browser (Chrome, Firefox, Safari, Edge)
@@ -85,7 +85,7 @@ That's it! No npm install, no build process. 🎉
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 e-commerce/
@@ -104,7 +104,7 @@ e-commerce/
 
 ---
 
-## 🎨 Color Palette
+##  Color Palette
 
 | Color          | Hex       | Usage                |
 |----------------|-----------|----------------------|
@@ -117,7 +117,7 @@ e-commerce/
 
 ---
 
-## 🎬 Key Animations
+##  Key Animations
 
 - **Banner Glow** - Alternating cyan/purple shadow effect
 - **Badge Pulse** - Breathing animation on "NEW ARRIVALS"
@@ -128,7 +128,7 @@ e-commerce/
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions, issues, and feature requests are welcome!
 
@@ -140,13 +140,13 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-## 📝 License
+##  License
 
 This project is free to use for personal and educational purposes.
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Vishal Raj**
 
@@ -154,7 +154,7 @@ This project is free to use for personal and educational purposes.
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Product images from [Pexels](https://www.pexels.com/)
 - Font from [Google Fonts](https://fonts.google.com/)
@@ -164,8 +164,8 @@ This project is free to use for personal and educational purposes.
 
 <div align="center">
 
-### ⭐ Star this repository if you found it helpful!
+###  Star this repository if you found it helpful!
 
-Made with ❤️ by Vishal Raj
+Made  by Vishal Raj
 
 </div>
