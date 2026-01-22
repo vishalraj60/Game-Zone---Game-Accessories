@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -8,76 +9,96 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="script.js" defer></script>
 </head>
+
 <body>
   <div class="wrap">
     <header>
-  <div class="brand">
-    <div class="logo">
-      <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-        <circle class="orbit" cx="25" cy="25" r="15" fill="none" stroke="#071024" stroke-width="2"/>
-        <circle class="planet" cx="40" cy="25" r="3" fill="#071024"/>
-        <text x="25" y="32" font-size="20" font-weight="bold" text-anchor="middle" fill="#071024">GZ</text>
-      </svg>
-    </div>
-    <div>
-      <h1>GameZone</h1>
-      <p>Gaming Accessories</p>
-    </div>
-  </div>
+      <div class="brand">
+        <div class="logo">
+          <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+            <circle class="orbit" cx="25" cy="25" r="15" fill="none" stroke="#071024" stroke-width="2" />
+            <circle class="planet" cx="40" cy="25" r="3" fill="#071024" />
+            <text x="25" y="32" font-size="20" font-weight="bold" text-anchor="middle" fill="#071024">GZ</text>
+          </svg>
+        </div>
+        <div>
+          <h1>GameZone</h1>
+          <p>Gaming Accessories</p>
+        </div>
+      </div>
 
-  <div class="controls">
-    <div class="search">
-      <input type="text" placeholder="Search accessories..." />
-    </div>
+      <div class="controls">
+        <div class="search">
+          <input type="text" id="searchInput" placeholder="Search accessories..." />
+          <button class="clear-btn" id="clearSearch"
+            onclick="document.getElementById('searchInput').value=''; this.classList.remove('visible');">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
 
-    <!-- Categories moved here -->
-      <div class="categories">
-        <div class="glow-category">
-          <span>🎮 All</span>
-          <div class="dropdown">
-            <button>Keyboards</button>
-            <button>Headsets</button>
-            <button>Controllers</button>
-            <button>Mouse</button>
+        <!-- Categories moved here -->
+        <div class="categories">
+          <div class="glow-category">
+            <span>🎮 All</span>
+            <div class="dropdown">
+              <button>Keyboards</button>
+              <button>Headsets</button>
+              <button>Controllers</button>
+              <button>Mouse</button>
+            </div>
+          </div>
+
+          <div class="glow-category">
+            <span>⌨️ Keyboards</span>
+            <div class="dropdown">
+              <button>Mechanical</button>
+              <button>Membrane</button>
+            </div>
+          </div>
+
+          <div class="glow-category">
+            <span>🎧 Headsets</span>
+            <div class="dropdown">
+              <button>Wired</button>
+              <button>Wireless</button>
+            </div>
+          </div>
+
+          <div class="glow-category">
+            <span>🕹️ Controllers</span>
+            <div class="dropdown">
+              <button>Xbox</button>
+              <button>PlayStation</button>
+              <button>Switch</button>
+            </div>
+          </div>
+
+          <div class="glow-category">
+            <span>🖱️ Mouse</span>
+            <div class="dropdown">
+              <button>Wired</button>
+              <button>Wireless</button>
+              <button>RGB</button>
+            </div>
           </div>
         </div>
 
-        <div class="glow-category">
-          <span>⌨️ Keyboards</span>
-          <div class="dropdown">
-            <button>Mechanical</button>
-            <button>Membrane</button>
-          </div>
-        </div>
+        <button class="cart-btn" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge">3</span>
+        </button>
 
-        <div class="glow-category">
-          <span>🎧 Headsets</span>
-          <div class="dropdown">
-            <button>Wired</button>
-            <button>Wireless</button>
-          </div>
-        </div>
+      </div>
 
-        <div class="glow-category">
-          <span>🕹️ Controllers</span>
-          <div class="dropdown">
-            <button>Xbox</button>
-            <button>PlayStation</button>
-            <button>Switch</button>
-          </div>
-        </div>
-
-        <div class="glow-category">
-          <span>🖱️ Mouse</span>
-          <div class="dropdown">
-            <button>Wired</button>
-            <button>Wireless</button>
-            <button>RGB</button>
-          </div>
-        </div>
-  </div>
-
-</header>
+    </header>
 
 
     <section class="hero">
@@ -86,7 +107,8 @@
         <h2 class="hero-title">
           <span class="gradient-text">Level Up Your Gaming Setup</span>
         </h2>
-        <p class="hero-desc">Explore premium keyboards, headsets, and controllers designed for pro gamers. Get the competitive edge you need.</p>
+        <p class="hero-desc">Explore premium keyboards, headsets, and controllers designed for pro gamers. Get the
+          competitive edge you need.</p>
         <div class="stats">
           <div class="stat-item">
             <div class="stat-number">10K+</div>
@@ -110,48 +132,50 @@
         <!-- Animated Gaming Controller SVG -->
         <svg class="gaming-controller" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
           <!-- Controller body -->
-          <path class="controller-body" d="M50 80 Q50 50 80 50 L220 50 Q250 50 250 80 L250 120 Q250 150 220 150 L80 150 Q50 150 50 120 Z" fill="#1a2332" stroke="#00d4ff" stroke-width="2"/>
-          
+          <path class="controller-body"
+            d="M50 80 Q50 50 80 50 L220 50 Q250 50 250 80 L250 120 Q250 150 220 150 L80 150 Q50 150 50 120 Z"
+            fill="#1a2332" stroke="#00d4ff" stroke-width="2" />
+
           <!-- Left D-Pad -->
           <g class="dpad">
-            <rect x="80" y="85" width="15" height="30" rx="3" fill="#00d4ff"/>
-            <rect x="72.5" y="92.5" width="30" height="15" rx="3" fill="#00d4ff"/>
+            <rect x="80" y="85" width="15" height="30" rx="3" fill="#00d4ff" />
+            <rect x="72.5" y="92.5" width="30" height="15" rx="3" fill="#00d4ff" />
           </g>
-          
+
           <!-- Right Buttons -->
-          <circle class="btn-y" cx="210" cy="80" r="8" fill="#7c3aed"/>
-          <circle class="btn-b" cx="225" cy="95" r="8" fill="#00d4ff"/>
-          <circle class="btn-a" cx="210" cy="110" r="8" fill="#00d4ff"/>
-          <circle class="btn-x" cx="195" cy="95" r="8" fill="#7c3aed"/>
-          
+          <circle class="btn-y" cx="210" cy="80" r="8" fill="#7c3aed" />
+          <circle class="btn-b" cx="225" cy="95" r="8" fill="#00d4ff" />
+          <circle class="btn-a" cx="210" cy="110" r="8" fill="#00d4ff" />
+          <circle class="btn-x" cx="195" cy="95" r="8" fill="#7c3aed" />
+
           <!-- Center button -->
-          <circle class="center-btn" cx="150" cy="95" r="6" fill="#00d4ff"/>
-          
+          <circle class="center-btn" cx="150" cy="95" r="6" fill="#00d4ff" />
+
           <!-- Analog sticks -->
-          <circle class="analog-left" cx="125" cy="110" r="12" fill="#0b1220" stroke="#00d4ff" stroke-width="2"/>
-          <circle class="analog-right" cx="175" cy="110" r="12" fill="#0b1220" stroke="#7c3aed" stroke-width="2"/>
-          
+          <circle class="analog-left" cx="125" cy="110" r="12" fill="#0b1220" stroke="#00d4ff" stroke-width="2" />
+          <circle class="analog-right" cx="175" cy="110" r="12" fill="#0b1220" stroke="#7c3aed" stroke-width="2" />
+
           <!-- Trigger indicators -->
-          <rect class="trigger-l" x="60" y="45" width="30" height="8" rx="4" fill="#00d4ff" opacity="0.6"/>
-          <rect class="trigger-r" x="210" y="45" width="30" height="8" rx="4" fill="#7c3aed" opacity="0.6"/>
+          <rect class="trigger-l" x="60" y="45" width="30" height="8" rx="4" fill="#00d4ff" opacity="0.6" />
+          <rect class="trigger-r" x="210" y="45" width="30" height="8" rx="4" fill="#7c3aed" opacity="0.6" />
         </svg>
-        
+
         <!-- Floating particles -->
         <div class="particles">
           <svg class="particle particle-1" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="10,2 12,8 18,10 12,12 10,18 8,12 2,10 8,8" fill="#00d4ff"/>
+            <polygon points="10,2 12,8 18,10 12,12 10,18 8,12 2,10 8,8" fill="#00d4ff" />
           </svg>
           <svg class="particle particle-2" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="10" r="5" fill="#7c3aed"/>
+            <circle cx="10" cy="10" r="5" fill="#7c3aed" />
           </svg>
           <svg class="particle particle-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <rect x="5" y="5" width="10" height="10" fill="#00d4ff"/>
+            <rect x="5" y="5" width="10" height="10" fill="#00d4ff" />
           </svg>
           <svg class="particle particle-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="10,2 18,18 2,18" fill="#7c3aed"/>
+            <polygon points="10,2 18,18 2,18" fill="#7c3aed" />
           </svg>
         </div>
-        
+
         <div class="gaming-image">
           <img src="images/gaming-setup.jpg" alt="Gaming Setup">
         </div>
@@ -161,137 +185,247 @@
     <!-- Animated Wave Divider -->
     <div class="wave-divider">
       <svg viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg">
-        <path class="wave-path" d="M0,30 Q150,10 300,30 T600,30 T900,30 T1200,30 L1200,60 L0,60 Z" fill="url(#gradient)"/>
+        <path class="wave-path" d="M0,30 Q150,10 300,30 T600,30 T900,30 T1200,30 L1200,60 L0,60 Z"
+          fill="url(#gradient)" />
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3"/>
-            <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:0.3"/>
-            <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0.3"/>
+            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3" />
+            <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:0.3" />
+            <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0.3" />
           </linearGradient>
         </defs>
       </svg>
     </div>
 
-    
 
-      <section class="grid">
-        <!-- Loading Spinner (hidden by default) -->
-        <div class="loading-spinner" style="display:none;">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle class="spinner-track" cx="50" cy="50" r="40" fill="none" stroke="rgba(0,212,255,0.2)" stroke-width="6"/>
-            <circle class="spinner-head" cx="50" cy="50" r="40" fill="none" stroke="url(#spinnerGradient)" stroke-width="6" stroke-linecap="round"/>
-            <defs>
-              <linearGradient id="spinnerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#8b5cf6"/>
-                <stop offset="100%" style="stop-color:#6d28d9"/>
-              </linearGradient>
-            </defs>
-          </svg>
+
+    <section class="grid">
+      <!-- Loading Spinner (hidden by default) -->
+      <div class="loading-spinner" style="display:none;">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle class="spinner-track" cx="50" cy="50" r="40" fill="none" stroke="rgba(0,212,255,0.2)"
+            stroke-width="6" />
+          <circle class="spinner-head" cx="50" cy="50" r="40" fill="none" stroke="url(#spinnerGradient)"
+            stroke-width="6" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="spinnerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#8b5cf6" />
+              <stop offset="100%" style="stop-color:#6d28d9" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Gaming Headset -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/headset.jpg" alt="Gaming Headset">
+          <div class="discount-badge">-15%</div>
         </div>
-        
-        <!-- Gaming Headset -->
-        <div class="card">
-          <div class="card-image">
-            <img src="images/headset.jpg" alt="Gaming Headset">
-            <div class="discount-badge">-15%</div>
+        <div class="card-content">
+          <h4>Razer Kraken Gaming Headset</h4>
+          <div class="price">
+            <span class="current-price">$79.99</span>
+            <span class="original-price">$94.99</span>
           </div>
-          <div class="card-content">
-            <h4>Razer Kraken Gaming Headset</h4>
-            <div class="price">
-              <span class="current-price">$79.99</span>
-              <span class="original-price">$94.99</span>
-            </div>
-            <button class="btn">Add to Cart</button>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+
+      <!-- Gaming Mouse -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/mouse.jpg" alt="Gaming Mouse">
+          <div class="new-badge">New</div>
+        </div>
+        <div class="card-content">
+          <h4>Logitech G502 Mouse</h4>
+          <div class="price">
+            <span class="current-price">$69.99</span>
           </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+
+      <!-- Gaming Keyboard -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/keyboard.jpg" alt="Gaming Keyboard">
+          <div class="sold-out">Sold Out</div>
+        </div>
+        <div class="card-content">
+          <h4>Corsair K95 RGB</h4>
+          <div class="price">
+            <span class="current-price">$199.99</span>
+          </div>
+          <button class="btn view-details" disabled>Out of Stock</button>
+        </div>
+      </div>
+
+      <!-- Gaming Controller -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/controller.jpg" alt="Gaming Controller">
+        </div>
+        <div class="card-content">
+          <h4>Xbox Elite Controller</h4>
+          <div class="price">
+            <span class="current-price">$149.99</span>
+          </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+
+      <!-- Gaming Monitor -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/gaming-monitor.png" alt="Gaming Monitor">
+          <div class="sale-badge">Sale</div>
+        </div>
+        <div class="card-content">
+          <h4>ASUS ROG 27" Monitor</h4>
+          <div class="price">
+            <span class="current-price">$349.99</span>
+            <span class="original-price">$399.99</span>
+          </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+
+      <!-- Gaming Chair -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/gaming-chair.png" alt="Gaming Chair">
+        </div>
+        <div class="card-content">
+          <h4>DXRacer Gaming Chair</h4>
+          <div class="price">
+            <span class="current-price">$399.99</span>
+          </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="images/graphics card.jpg" alt="Graphics Card">
+        </div>
+        <div class="card-content">
+          <h4>Graphics Card</h4>
+          <div class="price">
+            <span class="current-price">$1999</span>
+          </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- RGB Gaming Mousepad -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/gaming-mousepad.png" alt="Gaming Mousepad">
+        </div>
+        <div class="card-content">
+          <h4>RGB Extended Mousepad</h4>
+          <div class="price">
+            <span class="current-price">$39.99</span>
+          </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+
+      <!-- PS5 Controller -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/ps5-controller.png" alt="PS5 Controller">
+          <div class="sale-badge">Hot</div>
+        </div>
+        <div class="card-content">
+          <h4>PS5 DualSense Controller</h4>
+          <div class="price">
+            <span class="current-price">$69.99</span>
+          </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+
+      <!-- Gaming Webcam -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/gaming-webcam.png" alt="Gaming Webcam">
+          <div class="new-badge">4K</div>
+        </div>
+        <div class="card-content">
+          <h4>4K Pro Streaming Webcam</h4>
+          <div class="price">
+            <span class="current-price">$179.99</span>
+          </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+
+      <!-- RGB Gaming Speakers -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/gaming-speakers.png" alt="Gaming Speakers">
+          <div class="discount-badge">-15%</div>
+        </div>
+        <div class="card-content">
+          <h4>RGB 2.1 Gaming Speakers</h4>
+          <div class="price">
+            <span class="current-price">$129.99</span>
+            <span class="original-price">$149.99</span>
+          </div>
+          <button class="btn view-details">View Details</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-title">GameZone</div>
+          <div class="footer-subtitle">Gaming Accessories</div>
+          <p class="footer-desc">Premium gear for competitive play. Upgrade your setup with keyboards, headsets, controllers, and more.</p>
         </div>
 
-        <!-- Gaming Mouse -->
-        <div class="card">
-          <div class="card-image">
-            <img src="images/mouse.jpg" alt="Gaming Mouse">
-            <div class="new-badge">New</div>
-          </div>
-          <div class="card-content">
-            <h4>Logitech G502 Mouse</h4>
-            <div class="price">
-              <span class="current-price">$69.99</span>
-            </div>
-            <button class="btn">Add to Cart</button>
-          </div>
+        <div class="footer-col">
+          <div class="footer-heading">Quick Links</div>
+          <a href="#" class="footer-link">Shop</a>
+          <a href="#" class="footer-link">New Arrivals</a>
+          <a href="#" class="footer-link">Best Sellers</a>
+          <a href="#" class="footer-link">Offers</a>
         </div>
 
-        <!-- Gaming Keyboard -->
-        <div class="card">
-          <div class="card-image">
-            <img src="images/keyboard.jpg" alt="Gaming Keyboard">
-            <div class="sold-out">Sold Out</div>
-          </div>
-          <div class="card-content">
-            <h4>Corsair K95 RGB</h4>
-            <div class="price">
-              <span class="current-price">$199.99</span>
-            </div>
-            <button class="btn" disabled>Out of Stock</button>
-          </div>
+        <div class="footer-col">
+          <div class="footer-heading">Support</div>
+          <a href="#" class="footer-link">Contact</a>
+          <a href="#" class="footer-link">Shipping</a>
+          <a href="#" class="footer-link">Returns</a>
+          <a href="#" class="footer-link">FAQ</a>
         </div>
 
-        <!-- Gaming Controller -->
-        <div class="card">
-          <div class="card-image">
-            <img src="images/controller.jpg" alt="Gaming Controller">
-          </div>
-          <div class="card-content">
-            <h4>Xbox Elite Controller</h4>
-            <div class="price">
-              <span class="current-price">$149.99</span>
-            </div>
-            <button class="btn">Add to Cart</button>
-          </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <a href="#" class="footer-link">Instagram</a>
+          <a href="#" class="footer-link">X</a>
+          <a href="#" class="footer-link">YouTube</a>
+          <a href="#" class="footer-link">Discord</a>
         </div>
+      </div>
 
-        <!-- Gaming Monitor -->
-        <div class="card">
-          <div class="card-image">
-            <img src="images/gaming-setup.jpg" alt="Gaming Setup">
-            <div class="sale-badge">Sale</div>
-          </div>
-          <div class="card-content">
-            <h4>ASUS ROG 27" Monitor</h4>
-            <div class="price">
-              <span class="current-price">$349.99</span>
-              <span class="original-price">$399.99</span>
-            </div>
-            <button class="btn">Add to Cart</button>
-          </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© <span id="footerYear"></span> GameZone. All rights reserved.</div>
+        <div class="footer-legal">
+          <a href="#" class="footer-link">Privacy</a>
+          <a href="#" class="footer-link">Terms</a>
         </div>
-
-        <!-- Gaming Chair -->
-        <div class="card">
-          <div class="card-image">
-            <img src="images/banner.png" alt="Gaming Chair">
-          </div>
-          <div class="card-content">
-            <h4>DXRacer Gaming Chair</h4>
-            <div class="price">
-              <span class="current-price">$399.99</span>
-            </div>
-            <button class="btn">Add to Cart</button>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-image">
-              <img src="images/graphics card.jpg" alt="Graphics Card">
-              <div class="card-content">
-                <h4>Graphics Card</h4>
-                <div class="price">
-                  <span class="current-price">$1999</span>
-                </div>
-                <button class="btn">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </footer>
+  </div>
   </div>
 </body>
+
 </html>
