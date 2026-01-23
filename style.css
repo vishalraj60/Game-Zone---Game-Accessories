@@ -22,8 +22,8 @@ body {
 body {
   margin: 0;
   font-family: Inter, sans-serif;
-  background: linear-gradient(180deg, #10071f 0%, #180f2e 60%);
-  color: #e6eef8;
+  background: #ffffff;
+  color: #071024;
   line-height: 1.4;
   padding: 32px 16px;
   display: flex;
@@ -44,12 +44,14 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(20, 15, 35, 0.95);
+  color: #e6eef8;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);
   backdrop-filter: blur(12px);
   padding: 6px 16px;
-  border-radius: 10px;
+  border-radius: 40px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  gap: 20px;
 }
 
 
@@ -78,6 +80,7 @@ header {
 .brand h1 {
   font-size: 16px;
   margin: 0;
+  color: #000000;
 }
 
 .brand p {
@@ -135,8 +138,9 @@ header {
 }
 
 .search {
-  background: var(--glass);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: transparent;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 8px 12px;
   border-radius: 10px;
   display: flex;
@@ -155,12 +159,13 @@ header {
   background: transparent;
   border: 0;
   outline: 0;
-  color: inherit;
+  color: #000000;
   width: 220px;
+  font-weight: 300;
 }
 
 .search input::placeholder {
-  color: var(--muted);
+  color: #000000;
   transition: opacity 0.3s ease;
 }
 
@@ -227,16 +232,16 @@ header {
   --btn-color: rgba(80, 150, 220, 0.1);
 
   position: relative;
-  border: 1px solid var(--glow-color);
+  border: none;
   padding: 0.3em 0.8em;
-  color: var(--glow-color);
-  font-size: 12px;
-  font-weight: 600;
-  background-color: var(--btn-color);
+  color: #000000;
+  font-size: 15px;
+  font-weight: 400;
+  background-color: transparent;
   border-radius: 6px;
   cursor: pointer;
   text-align: center;
-  box-shadow: 0 0 4px rgba(180, 220, 255, 0.3);
+  box-shadow: none;
   z-index: 1;
 }
 
@@ -244,10 +249,6 @@ header {
 
 .glow-category.active {
   color: #e6f0ff;
-  background-color: rgba(180, 220, 255, 0.25);
-  box-shadow: 0 0 0.3em 0.05em var(--glow-color),
-    0 0 1em 0.5em var(--glow-spread-color),
-    inset 0 0 0.2em 0.05em var(--glow-color);
 }
 
 /* Dropdown */
@@ -302,7 +303,6 @@ header {
   .glow-category .dropdown:hover~span,
   .glow-category:hover>span {
     color: #e6f0ff;
-    background-color: rgba(180, 220, 255, 0.2);
   }
 
   /* Prevent dropdown from closing when moving from button to dropdown */
@@ -678,8 +678,8 @@ aside {
 }
 
 .card {
-  background: var(--card);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
   border-radius: 12px;
   padding: 16px;
   text-align: center;
@@ -691,9 +691,10 @@ aside {
 }
 
 .card:hover {
+  background: #e6e0ff;
   transform: translateY(-5px);
-  border-color: rgba(139, 92, 246, 0.2);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.15);
 }
 
 .card img {
@@ -722,11 +723,11 @@ aside {
 }
 
 .current-price {
-  color: #fff;
+  color: #000000;
 }
 
 .original-price {
-  color: var(--muted);
+  color: #6c757d;
   text-decoration: line-through;
   font-size: 0.9em;
   font-weight: 400;
@@ -735,13 +736,13 @@ aside {
 .card h4 {
   margin: 8px 0 4px;
   font-size: 1rem;
-  color: #fff;
+  color: #000000;
   font-weight: 500;
 }
 
 .card p {
   margin: 0 0 12px;
-  color: var(--muted);
+  color: #000000;
   font-size: 0.9rem;
 }
 
@@ -762,10 +763,9 @@ aside {
 }
 
 .card:hover {
-  background: linear-gradient(50deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
   border-color: var(--accent);
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -1193,6 +1193,7 @@ aside {
 .footer-title {
   font-weight: 700;
   letter-spacing: 0.2px;
+  color: #000000;
 }
 
 .footer-subtitle {
@@ -1202,7 +1203,7 @@ aside {
 
 .footer-desc {
   margin: 8px 0 0;
-  color: var(--muted);
+  color: #000000;
   font-size: 13px;
   line-height: 1.6;
 }
@@ -1218,11 +1219,11 @@ aside {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #e6eef8;
+  color: #000000;
 }
 
 .footer-link {
-  color: var(--muted);
+  color: #000000;
   text-decoration: none;
   font-size: 13px;
   transition: color 0.2s ease, transform 0.2s ease;
@@ -1245,7 +1246,7 @@ aside {
 }
 
 .footer-copy {
-  color: var(--muted);
+  color: #000000;
   font-size: 13px;
 }
 

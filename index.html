@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GameZone — Gaming Accessories</title>
+  <title>GameZone</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="script.js" defer></script>
@@ -22,27 +23,27 @@
           </svg>
         </div>
         <div>
-          <h1>GameZone</h1>
-          <p>Gaming Accessories</p>
+          <h1 style="font-family: 'Pacifico', cursive">GameZone</h1>
+          <p style="color: black;">Gaming Accessories</p>
         </div>
       </div>
 
-      <div class="controls">
-        <div class="search">
-          <input type="text" id="searchInput" placeholder="Search accessories..." />
-          <button class="clear-btn" id="clearSearch"
-            onclick="document.getElementById('searchInput').value=''; this.classList.remove('visible');">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Search accessories..." />
+        <button class="clear-btn" id="clearSearch"
+          onclick="document.getElementById('searchInput').value=''; this.classList.remove('visible');">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
 
+      <div class="controls">
         <!-- Categories moved here -->
         <div class="categories">
           <div class="glow-category">
-            <span>🎮 All</span>
+            <span>All</span>
             <div class="dropdown">
               <button>Keyboards</button>
               <button>Headsets</button>
@@ -52,7 +53,7 @@
           </div>
 
           <div class="glow-category">
-            <span>⌨️ Keyboards</span>
+            <span>Keyboards</span>
             <div class="dropdown">
               <button>Mechanical</button>
               <button>Membrane</button>
@@ -60,7 +61,7 @@
           </div>
 
           <div class="glow-category">
-            <span>🎧 Headsets</span>
+            <span>Headsets</span>
             <div class="dropdown">
               <button>Wired</button>
               <button>Wireless</button>
@@ -68,7 +69,7 @@
           </div>
 
           <div class="glow-category">
-            <span>🕹️ Controllers</span>
+            <span>Controllers</span>
             <div class="dropdown">
               <button>Xbox</button>
               <button>PlayStation</button>
@@ -77,7 +78,7 @@
           </div>
 
           <div class="glow-category">
-            <span>🖱️ Mouse</span>
+            <span>Mouse</span>
             <div class="dropdown">
               <button>Wired</button>
               <button>Wireless</button>
