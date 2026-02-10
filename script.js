@@ -1,4 +1,126 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // Cart functionality
+  let cartCount = 0;
+  const cartBadge = document.querySelector('.cart-badge');
+  
+  // Initialize cart count from localStorage
+  function initializeCart() {
+    const savedCartCount = localStorage.getItem('gamezone_cart_count');
+    if (savedCartCount) {
+      cartCount = parseInt(savedCartCount);
+      updateCartBadge();
+    }
+  }
+  
+  // Update cart badge display
+  function updateCartBadge() {
+    if (cartBadge) {
+      cartBadge.textContent = cartCount;
+      if (cartCount > 0) {
+        cartBadge.style.display = 'inline-block';
+      } else {
+        cartBadge.style.display = 'none';
+      }
+    }
+  }
+  
+  // Add to cart function
+  function addToCart(productName, price) {
+    cartCount++;
+    localStorage.setItem('gamezone_cart_count', cartCount);
+    updateCartBadge();
+    
+    // Show feedback to user
+    showAddToCartFeedback(productName);
+  }
+  
+  // Show visual feedback when item is added to cart
+  function showAddToCartFeedback(productName) {
+    // Create feedback element
+    const feedback = document.createElement('div');
+    feedback.className = 'cart-feedback';
+    feedback.textContent = `${productName} added to cart!`;
+    feedback.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    `;
+    
+    document.body.appendChild(feedback);
+    
+    // Remove feedback after 2 seconds
+    setTimeout(() => {
+      feedback.style.animation = 'slideOut 0.3s ease';
+      setTimeout(() => {
+        document.body.removeChild(feedback);
+      }, 300);
+    }, 2000);
+  }
+  
+  // Add click event listeners to all add-to-cart buttons
+  function setupAddToCartButtons() {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Get product info from the card
+        const card = this.closest('.card');
+        const productName = card.querySelector('h4').textContent;
+        const priceElement = card.querySelector('.current-price');
+        const price = priceElement ? priceElement.textContent : '0';
+        
+        // Add to cart
+        addToCart(productName, price);
+        
+        // Add visual feedback to button
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = 'scale(1)';
+        }, 100);
+      });
+    });
+  }
+  
+  // Add CSS animations for feedback
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // Initialize cart and setup buttons
+  initializeCart();
+  setupAddToCartButtons();
+
   // Get all category elements
   const categories = document.querySelectorAll('.glow-category');
 

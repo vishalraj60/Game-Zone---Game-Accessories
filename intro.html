@@ -100,14 +100,15 @@
 
         .btn-outline {
             background: transparent;
-            color: #071024;
-            border: 2px solid var(--accent);
+            color: #ffffff;
+            border: 2px solid rgb(122, 63, 249);
         }
 
         .btn-outline:hover {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            color: rgb(255, 255, 255);
+            box-shadow: 0 10px 20px rgba(158, 124, 238, 0.3);
         }
 
         .btn-primary {
@@ -127,18 +128,89 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 120px 40px 60px;
             position: relative;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 212, 255, 0.05));
+        }
+
+        /* Hero Image */
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .hero-content {
-            max-width: 1200px;
+            position: relative;
+            z-index: 10;
             text-align: center;
-            z-index: 2;
+            color: #fefefe;
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        /* Newsletter Form */
+        .newsletter-form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #071024;
+            transition: all 0.3s ease;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .email-input::placeholder {
+            color: #6c757d;
+        }
+
+        .subscribe-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             margin-bottom: 20px;
             background: linear-gradient(135deg, var(--accent), #00d4ff);
@@ -154,11 +226,9 @@
         }
 
         .hero p {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 30px;
             color: #071024;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
             margin-right: auto;
             line-height: 1.6;
         }
@@ -239,26 +309,85 @@
                 font-size: 24px;
             }
 
-            .auth-buttons {
-                gap: 10px;
-            }
-
-            .btn {
-                padding: 10px 18px;
-                font-size: 13px;
-            }
-
             .hero {
-                padding: 100px 20px 40px;
+                padding: 20px;
             }
 
-            .cta-buttons {
+            .hero-content {
+                padding: 30px 20px;
+                margin: 10px auto;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 7vw, 3rem);
+            }
+
+            .hero p {
+                font-size: clamp(0.9rem, 2vw, 1rem);
+            }
+
+            /* Hero Video */
+            .hero-video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                overflow: hidden;
+            }
+
+            .hero-video video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Video Overlay */
+            .video-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.4);
+                z-index: 2;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 10;
+                text-align: center;
+                color: white;
+                padding: 40px;
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 20px;
+                backdrop-filter: blur(50px);
+                max-width: 800px;
+                margin: 20px auto;
+            }
+
+            /* Newsletter Form */
+            .newsletter-form {
+                margin-bottom: 30px;
+            }
+
+            .form-group {
                 flex-direction: column;
-                align-items: center;
+                gap: 15px;
+            }
+
+            .email-input {
+                padding: 12px;
+            }
+
+            .subscribe-btn {
+                padding: 12px 24px;
             }
 
             .btn-large {
-                width: 200px;
+                width: 160px;
+                padding: 12px 0;
             }
         }
     </style>
@@ -290,6 +419,12 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Landing Image -->
+        <div class="hero-image">
+            <img src="images/landing_image.png" alt="GameZone Gaming Setup">
+        </div>
+        
+        <!-- Welcome Content with Form -->
         <div class="hero-content">
             <h1>Welcome to GameZone</h1>
             <p>Your ultimate destination for premium gaming accessories. Gear up for victory with our curated collection of high-performance gaming equipment.</p>
@@ -338,6 +473,30 @@
                 }
             });
         });
+
+        // Newsletter form functionality
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.querySelector('.email-input').value;
+            
+            if (email && isValidEmail(email)) {
+                // Store email (in real app, this would be sent to server)
+                localStorage.setItem('gamezone_newsletter_email', email);
+                
+                // Show success message
+                alert('Thank you for subscribing! Check your email for exclusive offers.');
+                
+                // Clear form
+                document.querySelector('.email-input').value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
     </script>
 </body>
 </html>
