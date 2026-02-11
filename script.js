@@ -1,22 +1,33 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Cart functionality
-  let cartCount = 0;
+  // Cart functionality - make cart global to persist across page loads
+  if (!window.gamezoneCart) {
+    window.gamezoneCart = [];
+  }
+  let cart = window.gamezoneCart;
   const cartBadge = document.querySelector('.cart-badge');
   
-  // Initialize cart count from localStorage
+  // Initialize cart from localStorage
   function initializeCart() {
-    const savedCartCount = localStorage.getItem('gamezone_cart_count');
-    if (savedCartCount) {
-      cartCount = parseInt(savedCartCount);
-      updateCartBadge();
+    const savedCart = localStorage.getItem('gamezone_cart');
+    console.log('Saved cart from localStorage:', savedCart);
+    if (savedCart) {
+      cart = JSON.parse(savedCart);
+      window.gamezoneCart = cart; // Update global reference
+      console.log('Parsed cart:', cart);
+    } else {
+      console.log('No saved cart found, starting with empty cart');
+      cart = [];
+      window.gamezoneCart = cart;
     }
+    updateCartBadge();
   }
   
   // Update cart badge display
   function updateCartBadge() {
     if (cartBadge) {
-      cartBadge.textContent = cartCount;
-      if (cartCount > 0) {
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartBadge.textContent = totalCount;
+      if (totalCount > 0) {
         cartBadge.style.display = 'inline-block';
       } else {
         cartBadge.style.display = 'none';
@@ -26,8 +37,37 @@ document.addEventListener('DOMContentLoaded', function () {
   
   // Add to cart function
   function addToCart(productName, price) {
-    cartCount++;
-    localStorage.setItem('gamezone_cart_count', cartCount);
+    // Always use the global cart reference
+    cart = window.gamezoneCart;
+    console.log('Adding to cart:', productName, price);
+    console.log('Current cart:', cart);
+    
+    // Check if item already exists in cart
+    const existingItemIndex = cart.findIndex(item => item.name === productName);
+    console.log('Existing item index:', existingItemIndex);
+    
+    if (existingItemIndex > -1) {
+      // Increment quantity if item exists
+      cart[existingItemIndex].quantity += 1;
+      console.log('Updated quantity for existing item:', cart[existingItemIndex].quantity);
+    } else {
+      // Add new item if it doesn't exist
+      const newItem = {
+        name: productName,
+        price: price,
+        quantity: 1,
+        image: `images/${productName.toLowerCase().replace(/\s+/g, '-')}.jpg`
+      };
+      cart.push(newItem);
+      console.log('Added new item:', newItem);
+    }
+    
+    // Update global reference
+    window.gamezoneCart = cart;
+    console.log('Cart after addition:', cart);
+    
+    // Save to localStorage
+    localStorage.setItem('gamezone_cart', JSON.stringify(cart));
     updateCartBadge();
     
     // Show feedback to user
