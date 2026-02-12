@@ -105,7 +105,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 2000);
   }
   
-  // Add click event listeners to all add-to-cart buttons
+  // View details function
+  function viewDetails(productName, price, image) {
+    // Navigate to product page with product information
+    const params = new URLSearchParams({
+      product: productName,
+      price: price,
+      image: image
+    });
+    window.location.href = `product.html?${params.toString()}`;
+  }
+
+  // Add click event listeners to all add-to-cart and view-details buttons
   function setupAddToCartButtons() {
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
     addToCartButtons.forEach(button => {
@@ -126,6 +137,25 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
           this.style.transform = 'scale(1)';
         }, 100);
+      });
+    });
+
+    // Setup view-details buttons
+    const viewDetailsButtons = document.querySelectorAll('.view-details:not([disabled])');
+    viewDetailsButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Get product info from the card
+        const card = this.closest('.card');
+        const productName = card.querySelector('h4').textContent;
+        const priceElement = card.querySelector('.current-price');
+        const price = priceElement ? priceElement.textContent : '0';
+        const imageElement = card.querySelector('.card-image img');
+        const image = imageElement ? imageElement.src : 'images/product-placeholder.jpg';
+        
+        // Navigate to product page
+        viewDetails(productName, price, image);
       });
     });
   }

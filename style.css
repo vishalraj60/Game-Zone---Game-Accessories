@@ -806,14 +806,15 @@ aside {
   background: var(--accent);
   color: white;
   border: none;
-  padding: 10px 16px;
+  padding: 8px 12px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
-  width: 100%;
+  width: auto;
+  min-width: 80px;
 }
 
 .btn:hover {
@@ -842,7 +843,7 @@ aside {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 100%;
+  width: auto;
   margin-bottom: 2px;
 }
 
