@@ -77,6 +77,28 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .thumbnail:hover img {
+            transform: scale(1.1);
+        }
+
+        .thumbnail.active::after {
+            content: '✓';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: var(--accent);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         .product-info {
@@ -508,7 +530,17 @@
                 </button>
             </div>
 
-            <button class="cart-btn" aria-label="Cart" onclick="window.location.href='cart.html'">
+            <div class="header-controls">
+              <button class="profile-btn" id="profileBtn" aria-label="Profile" onclick="window.location.href='profile.html'" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="profile-name" id="profileName">Profile</span>
+              </button>
+
+              <button class="cart-btn" aria-label="Cart" onclick="window.location.href='cart.html'">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
@@ -752,6 +784,25 @@
             image: 'images/product-placeholder.jpg'
         };
 
+        // Thumbnail mappings for products
+        const thumbnailMappings = {
+            'headset': ['images/headset-thumb-1.jpg', 'images/headset-thumb-2.jpg', 'images/headset-thumb-3.jpg', 'images/headset-thumb-4.jpg'],
+            'mouse': ['images/mouse-thumb-1.jpg', 'images/mouse-thumb-2.jpg', 'images/mouse-thumb-3.jpg', 'images/mouse-thumb-4.jpg'],
+            'keyboard': ['images/keyboard-thumb-1.jpg', 'images/keyboard-thumb-2.jpg', 'images/keyboard-thumb-3.jpg', 'images/keyboard-thumb-4.jpg'],
+            'controller': ['images/controller-thumb-1.jpg', 'images/controller-thumb-2.jpg', 'images/controller-thumb-3.jpg', 'images/controller-thumb-4.jpg'],
+            'monitor': ['images/monitor-thumb-1.jpg', 'images/monitor-thumb-2.jpg', 'images/monitor-thumb-3.jpg', 'images/monitor-thumb-4.jpg'],
+            'speakers': ['images/speakers-thumb-1.jpg', 'images/speakers-thumb-2.jpg', 'images/speakers-thumb-3.jpg', 'images/speakers-thumb-4.jpg'],
+            'graphics card': ['images/graphics-card-thumb-1.jpg', 'images/graphics-card-thumb-2.jpg', 'images/graphics-card-thumb-3.jpg', 'images/graphics-card-thumb-4.jpg'],
+            'mousepad': ['images/mousepad-thumb-1.jpg', 'images/mousepad-thumb-2.jpg', 'images/mousepad-thumb-3.jpg', 'images/mousepad-thumb-4.jpg'],
+            'ps5': ['images/ps5-thumb-1.jpg', 'images/ps5-thumb-2.jpg', 'images/ps5-thumb-3.jpg', 'images/ps5-thumb-4.jpg'],
+            'mic': ['images/mic-thumb-1.jpg', 'images/mic-thumb-2.jpg', 'images/mic-thumb-3.jpg', 'images/mic-thumb-4.jpg'],
+            'cpu': ['images/cpu-thumb-1.jpg', 'images/cpu-thumb-2.jpg', 'images/cpu-thumb-3.jpg', 'images/cpu-thumb-4.jpg'],
+            'ram': ['images/ram-thumb-1.jpg', 'images/ram-thumb-2.jpg', 'images/ram-thumb-3.jpg', 'images/ram-thumb-4.jpg'],
+            'cooler': ['images/cooler-thumb-1.jpg', 'images/cooler-thumb-2.jpg', 'images/cooler-thumb-3.jpg', 'images/cooler-thumb-4.jpg'],
+            'joystick': ['images/joystick-thumb-1.jpg', 'images/joystick-thumb-2.jpg', 'images/joystick-thumb-3.jpg', 'images/joystick-thumb-4.jpg'],
+            'wheel': ['images/wheel-thumb-1.jpg', 'images/wheel-thumb-2.jpg', 'images/wheel-thumb-3.jpg', 'images/wheel-thumb-4.jpg']
+        };
+
         // Load product data from URL parameters
         function loadProductData() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -770,8 +821,47 @@
             document.getElementById('currentPrice').textContent = currentProduct.price;
             document.getElementById('mainImage').src = currentProduct.image;
             
-            // Update main image thumbnail
-            document.querySelector('.thumbnail.active img').src = currentProduct.image;
+            // Update thumbnails based on product type
+            updateThumbnails();
+        }
+
+        // Update thumbnails based on product type
+        function updateThumbnails() {
+            const productName = currentProduct.name.toLowerCase();
+            let thumbnails = [];
+            
+            // Find matching thumbnail set
+            for (const [key, value] of Object.entries(thumbnailMappings)) {
+                if (productName.includes(key)) {
+                    thumbnails = value;
+                    break;
+                }
+            }
+            
+            // If no match found, use default thumbnails
+            if (thumbnails.length === 0) {
+                thumbnails = [
+                    currentProduct.image,
+                    'images/product-placeholder.jpg',
+                    'images/product-placeholder.jpg',
+                    'images/product-placeholder.jpg'
+                ];
+            }
+            
+            // Update thumbnail elements
+            const thumbnailElements = document.querySelectorAll('.thumbnail');
+            thumbnailElements.forEach((thumb, index) => {
+                const img = thumb.querySelector('img');
+                if (img && thumbnails[index]) {
+                    img.src = thumbnails[index];
+                    img.alt = `Thumbnail ${index + 1}`;
+                }
+            });
+            
+            // Set first thumbnail as active
+            if (thumbnailElements.length > 0) {
+                thumbnailElements[0].classList.add('active');
+            }
         }
 
         // Change main image
@@ -805,9 +895,9 @@
             const quantity = parseInt(document.getElementById('quantity').value);
             
             // Use the existing addToCart function from script.js
-            if (typeof addToCart === 'function') {
+            if (typeof window.addToCart === 'function') {
                 for (let i = 0; i < quantity; i++) {
-                    addToCart(currentProduct.name, currentProduct.price);
+                    window.addToCart(currentProduct.name, currentProduct.price);
                 }
             } else {
                 // Fallback if script.js not loaded

@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // Check login status and show profile button
+  checkLoginStatus();
+  
   // Cart functionality - make cart global to persist across page loads
   if (!window.gamezoneCart) {
     window.gamezoneCart = [];
@@ -284,5 +287,25 @@ document.addEventListener('DOMContentLoaded', function () {
   const footerYear = document.getElementById('footerYear');
   if (footerYear) {
     footerYear.textContent = String(new Date().getFullYear());
+  }
+
+  // Check login status and show/hide profile button
+  function checkLoginStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const profileBtn = document.getElementById('profileBtn');
+    const profileName = document.getElementById('profileName');
+    
+    if (isLoggedIn && profileBtn) {
+      const userData = localStorage.getItem('gamezone_user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        if (profileName) {
+          profileName.textContent = user.name.split(' ')[0]; // Show first name only
+        }
+      }
+      profileBtn.style.display = 'flex';
+    } else if (profileBtn) {
+      profileBtn.style.display = 'none';
+    }
   }
 });

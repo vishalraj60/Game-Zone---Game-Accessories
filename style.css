@@ -119,6 +119,47 @@ header {
   box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.profile-name {
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .profile-name {
+    display: none;
+  }
+  
+  .profile-btn {
+    padding: 8px;
+  }
+}
+
 .cart-badge {
   position: absolute;
   top: -8px;

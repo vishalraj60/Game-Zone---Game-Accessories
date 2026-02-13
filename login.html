@@ -81,12 +81,21 @@
         return;
       }
       
-      // Store user data (optional)
-      localStorage.setItem('userName', name);
-      localStorage.setItem('userPhone', phone);
+      // Store user data
+      const userData = {
+        name: name,
+        phone: phone,
+        email: '', // Can be added later
+        memberSince: new Date().getFullYear().toString(),
+        totalOrders: 0,
+        totalSpent: 0
+      };
       
-      // Redirect to index page
-      window.location.href = 'index.html';
+      localStorage.setItem('gamezone_user', JSON.stringify(userData));
+      localStorage.setItem('isLoggedIn', 'true');
+      
+      // Redirect to profile page
+      window.location.href = 'profile.html';
     });
   </script>
 </body>
