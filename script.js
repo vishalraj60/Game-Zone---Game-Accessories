@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // Check login status and show profile button
   checkLoginStatus();
   
+  // Check admin access
+  checkAdminAccess();
+  
   // Cart functionality - make cart global to persist across page loads
   if (!window.gamezoneCart) {
     window.gamezoneCart = [];
@@ -308,4 +311,26 @@ document.addEventListener('DOMContentLoaded', function () {
       profileBtn.style.display = 'none';
     }
   }
+
+  // Check admin access
+  function checkAdminAccess() {
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    const adminLinks = document.querySelectorAll('.admin-only');
+    
+    adminLinks.forEach(link => {
+      link.style.display = isAdmin ? 'block' : 'none';
+    });
+  }
+
+  // Global logout function
+  window.logout = function() {
+    // Clear all session data
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('gamezone_user');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('adminUser');
+    
+    // Redirect to home page
+    window.location.href = 'index.html';
+  };
 });
