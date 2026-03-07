@@ -5,12 +5,89 @@ document.addEventListener('DOMContentLoaded', function () {
   // Check admin access
   checkAdminAccess();
   
+  // Load products from data manager
+  loadProducts();
+  
   // Cart functionality - make cart global to persist across page loads
   if (!window.gamezoneCart) {
     window.gamezoneCart = [];
   }
   let cart = window.gamezoneCart;
   const cartBadge = document.querySelector('.cart-badge');
+  
+  // Load products from data manager
+  function loadProducts() {
+    if (window.gameZoneData) {
+      const products = window.gameZoneData.getProducts();
+      renderProducts(products);
+      setupDataChangeListener();
+    }
+  }
+  
+  // Render products function
+  function renderProducts(products) {
+    const container = document.getElementById('productsContainer');
+    if (!container) return;
+    
+    container.innerHTML = products.map(product => {
+      const priceInfo = window.gameZoneData.calculateFinalPrice(product);
+      const stockStatus = product.stock > 0 ? '' : '<div class="sold-out">Sold Out</div>';
+      const newBadge = product.id <= 2 ? '<div class="new-badge">New</div>' : '';
+      const saleBadge = priceInfo.discount > 15 ? '<span class="sale-badge">Hot</span>' : '';
+      
+      return `
+        <div class="card" data-product-id="${product.id}">
+          <div class="card-image">
+            <img src="${product.image}" alt="${product.name}">
+            ${stockStatus}
+            ${newBadge}
+            ${saleBadge}
+          </div>
+          <div class="card-content">
+            <h4>${product.name}</h4>
+            <div class="price">
+              <span class="current-price product-price">₹${priceInfo.finalPrice.toLocaleString('en-IN')}</span>
+              ${priceInfo.finalPrice < product.originalPrice ? 
+                `<span class="original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>
+                 <span class="discount-badge">-${priceInfo.discount}%</span>` : ''}
+            </div>
+            <button class="btn add-to-cart" onclick="addToCart('${product.name}', ${priceInfo.finalPrice}, ${product.id})" 
+                    ${product.stock <= 0 ? 'disabled' : ''}>
+              ${product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
+            </button>
+            <button class="btn view-details" onclick="viewProductDetails(${product.id})">View Details</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+  
+  // Setup data change listener
+  function setupDataChangeListener() {
+    window.addEventListener('gamezoneDataChange', (event) => {
+      const { type, action, data } = event.detail;
+      
+      if (type === 'product') {
+        // Reload products when data changes
+        const products = window.gameZoneData.getProducts();
+        renderProducts(products);
+        console.log('Products reloaded due to data change:', action);
+      }
+    });
+  }
+  
+  // View product details
+  function viewProductDetails(productId) {
+    const product = window.gameZoneData.getProduct(productId);
+    if (product) {
+      // Store product in localStorage for product page
+      localStorage.setItem('selectedProduct', JSON.stringify(product));
+      window.location.href = 'product.html';
+    }
+  }
+  
+  // Make functions global
+  window.viewProductDetails = viewProductDetails;
   
   // Initialize cart from localStorage
   function initializeCart() {
@@ -42,14 +119,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   
   // Add to cart function
-  function addToCart(productName, price) {
+  function addToCart(productName, price, productId) {
     // Always use the global cart reference
     cart = window.gamezoneCart;
-    console.log('Adding to cart:', productName, price);
+    console.log('Adding to cart:', productName, price, productId);
     console.log('Current cart:', cart);
     
     // Check if item already exists in cart
-    const existingItemIndex = cart.findIndex(item => item.name === productName);
+    const existingItemIndex = cart.findIndex(item => item.id === productId);
     console.log('Existing item index:', existingItemIndex);
     
     if (existingItemIndex > -1) {
@@ -58,11 +135,13 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('Updated quantity for existing item:', cart[existingItemIndex].quantity);
     } else {
       // Add new item if it doesn't exist
+      const product = window.gameZoneData.getProduct(productId);
       const newItem = {
+        id: productId,
         name: productName,
         price: price,
         quantity: 1,
-        image: `images/${productName.toLowerCase().replace(/\s+/g, '-')}.jpg`
+        image: product ? product.image : `images/${productName.toLowerCase().replace(/\s+/g, '-')}.jpg`
       };
       cart.push(newItem);
       console.log('Added new item:', newItem);

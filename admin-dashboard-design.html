@@ -162,6 +162,25 @@
             gap: 16px;
         }
 
+        .logout-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
         .notification-btn {
             position: relative;
             background: var(--bg-card);
@@ -651,6 +670,15 @@
                         <span class="notification-badge">3</span>
                     </div>
 
+                    <button class="logout-btn" onclick="logout()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        Logout
+                    </button>
+
                     <div class="admin-profile">
                         <div class="admin-avatar">A</div>
                         <div>
@@ -930,5 +958,26 @@
             </svg>
         </div>
     </div>
+
+    <script>
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear admin session
+                localStorage.removeItem('isAdmin');
+                localStorage.removeItem('adminUser');
+                
+                // Redirect to login page
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Check if admin is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('isAdmin') || localStorage.getItem('isAdmin') !== 'true') {
+                window.location.href = 'admin-login.html';
+            }
+        });
+    </script>
 </body>
 </html>
