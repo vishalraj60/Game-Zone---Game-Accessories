@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', function () {
   // Check admin access
   checkAdminAccess();
   
+  // Reset product data to load new products (temporary fix)
+  if (localStorage.getItem('gamezone_products')) {
+    const existingProducts = JSON.parse(localStorage.getItem('gamezone_products'));
+    if (existingProducts.length < 10) {
+      localStorage.removeItem('gamezone_products');
+      console.log('Reset product data to load new products');
+    }
+  }
+  
   // Load products from data manager
   loadProducts();
   
@@ -26,40 +35,49 @@ document.addEventListener('DOMContentLoaded', function () {
   
   // Render products function
   function renderProducts(products) {
-    const container = document.getElementById('productsContainer');
+    const container = document.querySelector('.grid[data-products-container]');
     if (!container) return;
     
-    container.innerHTML = products.map(product => {
+    // Remove existing products but keep loading spinner
+    const existingProducts = container.querySelectorAll('.card');
+    existingProducts.forEach(card => card.remove());
+    
+    // Add products directly to grid container
+    products.forEach(product => {
       const priceInfo = window.gameZoneData.calculateFinalPrice(product);
       const stockStatus = product.stock > 0 ? '' : '<div class="sold-out">Sold Out</div>';
       const newBadge = product.id <= 2 ? '<div class="new-badge">New</div>' : '';
       const saleBadge = priceInfo.discount > 15 ? '<span class="sale-badge">Hot</span>' : '';
       
-      return `
-        <div class="card" data-product-id="${product.id}">
-          <div class="card-image">
-            <img src="${product.image}" alt="${product.name}">
-            ${stockStatus}
-            ${newBadge}
-            ${saleBadge}
+      const productCard = document.createElement('div');
+      productCard.className = 'card';
+      productCard.setAttribute('data-product-id', product.id);
+      
+      productCard.innerHTML = `
+        <div class="card-image">
+          <img src="${product.image}" alt="${product.name}">
+          ${stockStatus}
+          ${newBadge}
+          ${saleBadge}
+        </div>
+        <div class="card-content">
+          <h4>${product.name}</h4>
+          <div class="price">
+            <span class="current-price product-price">₹${priceInfo.finalPrice.toLocaleString('en-IN')}</span>
+            ${priceInfo.finalPrice < product.originalPrice ? 
+              `<span class="original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>
+               <span class="discount-badge">-${priceInfo.discount}%</span>` : ''}
           </div>
-          <div class="card-content">
-            <h4>${product.name}</h4>
-            <div class="price">
-              <span class="current-price product-price">₹${priceInfo.finalPrice.toLocaleString('en-IN')}</span>
-              ${priceInfo.finalPrice < product.originalPrice ? 
-                `<span class="original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>
-                 <span class="discount-badge">-${priceInfo.discount}%</span>` : ''}
-            </div>
-            <button class="btn add-to-cart" onclick="addToCart('${product.name}', ${priceInfo.finalPrice}, ${product.id})" 
-                    ${product.stock <= 0 ? 'disabled' : ''}>
-              ${product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
-            </button>
-            <button class="btn view-details" onclick="viewProductDetails(${product.id})">View Details</button>
-          </div>
+          <button class="btn add-to-cart" onclick="addToCart('${product.name}', ${priceInfo.finalPrice}, ${product.id})" 
+                  ${product.stock <= 0 ? 'disabled' : ''}>
+            ${product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
+          </button>
+          <button class="btn view-details" onclick="viewProductDetails(${product.id})">View Details</button>
         </div>
       `;
-    }).join('');
+      
+      container.appendChild(productCard);
+    });
   }
   
   // Setup data change listener

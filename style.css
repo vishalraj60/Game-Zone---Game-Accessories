@@ -14,26 +14,28 @@
   box-sizing: border-box;
 }
 
-html
-body {
+html, body {
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   font-family: Inter, sans-serif;
   background: #ffffff;
   color: #071024;
   line-height: 1.4;
-  padding: 32px 16px;
-  display: flex;
-  justify-content: center;
 }
 
 .wrap {
   width: 100%;
   max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Header */
@@ -1341,7 +1343,7 @@ aside {
 }
 
 .site-footer {
-  margin-top: 28px;
+  margin-top: auto;
   padding: 28px;
   border-radius: 20px;
   background: linear-gradient(135deg, rgba(0, 212, 255, 0.06) 0%, rgba(124, 58, 237, 0.06) 100%);
