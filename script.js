@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Check login status and show profile button
-  checkLoginStatus();
+  // Check if user is logged in, if not redirect to landing page
+  if (!checkLoginStatus()) {
+    window.location.href = 'landingpage.html';
+    return;
+  }
   
   // Check admin access
   checkAdminAccess();
@@ -407,6 +410,8 @@ document.addEventListener('DOMContentLoaded', function () {
     } else if (profileBtn) {
       profileBtn.style.display = 'none';
     }
+    
+    return isLoggedIn;
   }
 
   // Check admin access

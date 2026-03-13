@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Login - GameZone</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <script src="../script.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="wrap">
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <button class="cart-btn" aria-label="Cart" onclick="window.location.href='../cart.html'">
+      <button class="cart-btn" aria-label="Cart" onclick="window.location.href='cart.html'">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <circle cx="9" cy="21" r="1"></circle>
@@ -62,9 +62,65 @@
         </div>
       </div>
     </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-title">GameZone</div>
+          <div class="footer-subtitle">Gaming Accessories</div>
+          <p class="footer-desc">Premium gear for competitive play. Upgrade your setup with keyboards, headsets, controllers, and more.</p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">Quick Links</div>
+          <a href="#" class="footer-link">Shop</a>
+          <a href="#" class="footer-link">New Arrivals</a>
+          <a href="#" class="footer-link">Best Sellers</a>
+          <a href="#" class="footer-link">Offers</a>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">Support</div>
+          <a href="#" class="footer-link">Contact</a>
+          <a href="#" class="footer-link">Shipping</a>
+          <a href="#" class="footer-link">Returns</a>
+          <a href="#" class="footer-link">FAQ</a>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">Account</div>
+          <a href="login.html" class="footer-link">Login</a>
+          <a href="signup.html" class="footer-link">Sign Up</a>
+          <a href="#" class="footer-link">My Profile</a>
+          <a href="admin-login.html" class="footer-link">Admin</a>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <a href="#" class="footer-link">Instagram</a>
+          <a href="#" class="footer-link">X</a>
+          <a href="#" class="footer-link">YouTube</a>
+          <a href="#" class="footer-link">Discord</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">© <span id="footerYear"></span> GameZone. All rights reserved.</div>
+        <div class="footer-legal">
+          <a href="#" class="footer-link">Privacy</a>
+          <a href="#" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </footer>
   </div>
 
   <script>
+    // Set current year in footer
+    const footerYear = document.getElementById('footerYear');
+    if (footerYear) {
+      footerYear.textContent = String(new Date().getFullYear());
+    }
+
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;

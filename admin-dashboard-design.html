@@ -460,6 +460,7 @@
         .data-table td {
             padding: 12px;
             border-bottom: 1px solid var(--border);
+            vertical-align: middle;
         }
 
         .data-table tr:hover {
@@ -684,43 +685,37 @@
             <nav>
                 <ul class="sidebar-nav">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="#" class="nav-link active" onclick="showSection('dashboard')">
                             <span class="nav-icon">📊</span>
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" onclick="showSection('products')">
                             <span class="nav-icon">📦</span>
                             Products
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <span class="nav-icon">🏷️</span>
-                            Offers & Discounts
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" onclick="showSection('orders')">
                             <span class="nav-icon">📋</span>
                             Orders
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" onclick="showSection('customers')">
                             <span class="nav-icon">👥</span>
                             Customers
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" onclick="showSection('analytics')">
                             <span class="nav-icon">📈</span>
                             Analytics
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" onclick="showSection('settings')">
                             <span class="nav-icon">⚙️</span>
                             Settings
                         </a>
@@ -771,13 +766,15 @@
 
             <!-- Page Content -->
             <div class="page-content">
-                <div class="page-header">
-                    <h1 class="page-title">Dashboard Overview</h1>
-                    <p class="page-subtitle">Manage your store and monitor performance</p>
-                </div>
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="content-section">
+                    <div class="page-header">
+                        <h1 class="page-title">Dashboard Overview</h1>
+                        <p class="page-subtitle">Manage your store and monitor performance</p>
+                    </div>
 
-                <!-- Stats Grid -->
-                <div class="stats-grid">
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">Total Revenue</span>
@@ -820,169 +817,123 @@
                         </div>
                     </div>
 
-                    <div class="stat-card danger">
+                    <div class="stat-card success">
                         <div class="stat-header">
-                            <span class="stat-title">Low Stock Items</span>
-                            <div class="stat-icon">⚠️</div>
+                            <span class="stat-title">Products Sold</span>
+                            <div class="stat-icon">📈</div>
                         </div>
-                        <div class="stat-value">8</div>
+                        <div class="stat-value">3,847</div>
                         <div class="stat-change positive">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7 14l5-5 5 5z"/>
                             </svg>
-                            4 items restocked
+                            18% from last month
+                        </div>
+                    </div>
+
+                    <div class="stat-card info">
+                        <div class="stat-header">
+                            <span class="stat-title">Top Seller</span>
+                            <div class="stat-icon">🏆</div>
+                        </div>
+                        <div class="stat-value">RGB Keyboard</div>
+                        <div class="stat-change positive">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7 14l5-5 5 5z"/>
+                            </svg>
+                            523 units sold
                         </div>
                     </div>
                 </div>
-
-                <!-- Product Management Section -->
-                <div class="management-section">
-                    <div class="section-header">
-                        <h2 class="section-title">Product Management</h2>
-                        <div class="section-actions">
-                            <button class="btn btn-secondary">Export</button>
-                            <button class="btn btn-primary">Add Product</button>
-                        </div>
-                    </div>
-
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Stock</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="product-info">
-                                        <div class="product-image">🎹</div>
-                                        <div>
-                                            <div style="font-weight: 600;">RGB Gaming Keyboard</div>
-                                            <div style="font-size: 12px; color: var(--text-secondary);">Mechanical switches</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input type="text" class="price-input" value="₹6,549" />
-                                </td>
-                                <td>
-                                    <input type="number" class="stock-input" value="45" />
-                                </td>
-                                <td>Keyboards</td>
-                                <td>
-                                    <span class="status-badge status-active">Active</span>
-                                </td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="action-btn">✏️</button>
-                                        <button class="action-btn delete">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="product-info">
-                                        <div class="product-image">🖱️</div>
-                                        <div>
-                                            <div style="font-weight: 600;">Wireless Gaming Mouse</div>
-                                            <div style="font-size: 12px; color: var(--text-secondary);">16000 DPI</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input type="text" class="price-input" value="₹5,699" />
-                                </td>
-                                <td>
-                                    <input type="number" class="stock-input" value="32" />
-                                </td>
-                                <td>Mouse</td>
-                                <td>
-                                    <span class="status-badge status-active">Active</span>
-                                </td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="action-btn">✏️</button>
-                                        <button class="action-btn delete">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="product-info">
-                                        <div class="product-image">🎧</div>
-                                        <div>
-                                            <div style="font-weight: 600;">Gaming Headset</div>
-                                            <div style="font-size: 12px; color: var(--text-secondary);">7.1 surround sound</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input type="text" class="price-input" value="₹6,499" />
-                                </td>
-                                <td>
-                                    <input type="number" class="stock-input" value="8" />
-                                </td>
-                                <td>Audio</td>
-                                <td>
-                                    <span class="status-badge status-active">Low Stock</span>
-                                </td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="action-btn">✏️</button>
-                                        <button class="action-btn delete">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
 
-                <!-- Offer Management Section -->
-                <div class="management-section">
-                    <div class="section-header">
-                        <h2 class="section-title">Active Offers & Discounts</h2>
-                        <div class="section-actions">
-                            <button class="btn btn-primary">Create Offer</button>
-                        </div>
+                <!-- Orders Section -->
+                <div id="orders-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1 class="page-title">Order Management</h1>
+                        <p class="page-subtitle">Manage customer orders and fulfillment</p>
+                    </div>
+                    <div style="text-align: center; padding: 60px; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 20px;">📋</div>
+                        <h3>Order Management</h3>
+                        <p>Orders section coming soon...</p>
+                    </div>
+                </div>
+
+                <!-- Customers Section -->
+                <div id="customers-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1 class="page-title">Customer Management</h1>
+                        <p class="page-subtitle">Manage customer accounts and relationships</p>
+                    </div>
+                    <div style="text-align: center; padding: 60px; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 20px;">👥</div>
+                        <h3>Customer Management</h3>
+                        <p>Customers section coming soon...</p>
+                    </div>
+                </div>
+
+                <!-- Analytics Section -->
+                <div id="analytics-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1 class="page-title">Analytics & Reports</h1>
+                        <p class="page-subtitle">View detailed analytics and business insights</p>
+                    </div>
+                    <div style="text-align: center; padding: 60px; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 20px;">📈</div>
+                        <h3>Analytics Dashboard</h3>
+                        <p>Analytics section coming soon...</p>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1 class="page-title">System Settings</h1>
+                        <p class="page-subtitle">Configure your store settings and preferences</p>
+                    </div>
+                    <div style="text-align: center; padding: 60px; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 20px;">⚙️</div>
+                        <h3>Settings Panel</h3>
+                        <p>Settings section coming soon...</p>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div id="products-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1 class="page-title">Product Management</h1>
+                        <p class="page-subtitle">Manage your product catalog and inventory</p>
                     </div>
 
-                    <div class="offer-card">
-                        <div class="offer-header">
-                            <div>
-                                <div class="offer-title">Weekend Gaming Sale</div>
-                                <div class="offer-description">Get up to 25% off on all gaming accessories</div>
-                            </div>
-                            <div class="action-buttons">
-                                <button class="action-btn">✏️</button>
-                                <button class="action-btn delete">🗑️</button>
+                    <!-- Product Management Section -->
+                    <div class="management-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Products</h2>
+                            <div class="section-actions">
+                                <button class="btn btn-secondary">Export</button>
+                                <button class="btn btn-primary" onclick="addNewProduct()">Add Product</button>
                             </div>
                         </div>
-                        <div class="offer-details">
-                            <div class="offer-detail">
-                                <div class="offer-detail-label">Discount</div>
-                                <div class="offer-detail-value">25%</div>
-                            </div>
-                            <div class="offer-detail">
-                                <div class="offer-detail-label">Type</div>
-                                <div class="offer-detail-value">Percentage</div>
-                            </div>
-                            <div class="offer-detail">
-                                <div class="offer-detail-label">Start Date</div>
-                                <div class="offer-detail-value">Jan 20, 2024</div>
-                            </div>
-                            <div class="offer-detail">
-                                <div class="offer-detail-label">End Date</div>
-                                <div class="offer-detail-value">Jan 31, 2024</div>
-                            </div>
-                            <div class="offer-detail">
-                                <div class="offer-detail-label">Status</div>
-                                <div class="offer-detail-value" style="color: var(--success);">Active</div>
-                            </div>
+
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Category</th>
+                                    <th>Offer</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Products will be dynamically loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                         </div>
                     </div>
 
@@ -1057,6 +1008,12 @@
             if (!localStorage.getItem('isAdmin') || localStorage.getItem('isAdmin') !== 'true') {
                 window.location.href = 'admin-login.html';
             }
+        });
+
+        // Initialize products on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            updateProductStats();
         });
 
         // Interactive Dashboard Functionality
@@ -1175,6 +1132,612 @@
             });
         });
 
+        // Navigation functionality
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName + '-section');
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+            
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            const activeLink = document.querySelector(`[onclick="showSection('${sectionName}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Update page title
+            updatePageTitle(sectionName);
+        }
+        
+        function updatePageTitle(section) {
+            const titles = {
+                'dashboard': 'Dashboard Overview',
+                'products': 'Product Management',
+                'orders': 'Order Management',
+                'customers': 'Customer Management',
+                'analytics': 'Analytics & Reports',
+                'settings': 'System Settings'
+            };
+            
+            const pageTitle = document.querySelector('.page-title');
+            if (pageTitle && titles[section]) {
+                pageTitle.textContent = titles[section];
+            }
+        }
+
+        // Product management functions
+        let products = [
+            {
+                id: 1,
+                name: 'RGB Gaming Keyboard',
+                description: 'Mechanical switches',
+                price: '₹6,549',
+                stock: 45,
+                category: 'Keyboards',
+                status: 'active',
+                icon: '🎹',
+                offer: 10
+            },
+            {
+                id: 2,
+                name: 'Wireless Gaming Mouse',
+                description: '16000 DPI',
+                price: '₹5,699',
+                stock: 23,
+                category: 'Mouse',
+                status: 'active',
+                icon: '🖱️',
+                offer: 0
+            },
+            {
+                id: 3,
+                name: 'Gaming Headset Pro',
+                description: '7.1 Surround Sound',
+                price: '₹8,999',
+                stock: 8,
+                category: 'Headsets',
+                status: 'active',
+                icon: '🎧',
+                offer: 15
+            },
+            {
+                id: 4,
+                name: 'Xbox Controller',
+                description: 'Wireless',
+                price: '₹4,299',
+                stock: 0,
+                category: 'Controllers',
+                status: 'inactive',
+                icon: '🎮',
+                offer: 0
+            },
+            {
+                id: 5,
+                name: 'Membrane Keyboard',
+                description: 'Quiet typing',
+                price: '₹2,999',
+                stock: 67,
+                category: 'Keyboards',
+                status: 'active',
+                icon: '⌨️',
+                offer: 5
+            },
+            {
+                id: 6,
+                name: 'Gaming Chair',
+                description: 'Ergonomic design',
+                price: '₹15,999',
+                stock: 12,
+                category: 'Accessories',
+                status: 'active',
+                icon: '🪑',
+                offer: 20
+            },
+            {
+                id: 7,
+                name: 'USB Gaming Headset',
+                description: 'Noise cancelling',
+                price: '₹3,499',
+                stock: 34,
+                category: 'Headsets',
+                status: 'active',
+                icon: '🎧',
+                offer: 0
+            },
+            {
+                id: 8,
+                name: 'PS5 Controller',
+                description: 'DualSense',
+                price: '₹5,999',
+                stock: 18,
+                category: 'Controllers',
+                status: 'active',
+                icon: '🎮',
+                offer: 10
+            },
+            {
+                id: 9,
+                name: 'Gaming Mouse Pad',
+                description: 'RGB lighting',
+                price: '₹1,299',
+                stock: 89,
+                category: 'Accessories',
+                status: 'active',
+                icon: '🖱️',
+                offer: 25
+            },
+            {
+                id: 10,
+                name: 'Mechanical Keyboard Pro',
+                description: 'Hot-swappable switches',
+                price: '₹9,999',
+                stock: 5,
+                category: 'Keyboards',
+                status: 'active',
+                icon: '🎹',
+                offer: 12
+            },
+            {
+                id: 11,
+                name: 'Wireless Earbuds',
+                description: 'Gaming edition',
+                price: '₹4,299',
+                stock: 41,
+                category: 'Headsets',
+                status: 'active',
+                icon: '🎧',
+                offer: 8
+            },
+            {
+                id: 12,
+                name: 'Gaming Monitor',
+                description: '27" 144Hz',
+                price: '₹22,999',
+                stock: 7,
+                category: 'Accessories',
+                status: 'active',
+                icon: '🖥️',
+                offer: 5
+            }
+        ];
+
+        function renderProducts() {
+            const tbody = document.querySelector('#products-section .data-table tbody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-product-id', product.id);
+                row.setAttribute('data-product-name', product.name);
+                row.innerHTML = `
+                    <td>
+                        <div class="product-info">
+                            <div class="product-image">${product.icon}</div>
+                            <div>
+                                <div style="font-weight: 600;">${product.name}</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">${product.description}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="text" class="price-input" value="${product.price}" onchange="showSaveButton(${product.id}, this)" oninput="showSaveButton(${product.id}, this)" />
+                    </td>
+                    <td>
+                        <input type="number" class="stock-input" value="${product.stock}" onchange="updateProductStock(${product.id}, this.value)" />
+                    </td>
+                    <td>${product.category}</td>
+                    <td>
+                        <div class="offer-input-wrapper">
+                            <input type="number" class="offer-input" value="${product.offer}" min="0" max="100" onchange="showOfferSaveButton(${product.id}, this)" oninput="showOfferSaveButton(${product.id}, this)" />
+                            <span class="offer-percent">%</span>
+                            <button class="btn btn-sm btn-success offer-save-btn" id="offer-save-btn-${product.id}" style="display: none;" onclick="saveProductOffer(${product.id})">Save</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="status-and-save">
+                            <span class="status-badge status-${product.status}">${product.status.charAt(0).toUpperCase() + product.status.slice(1)}</span>
+                            <button class="btn btn-sm btn-success save-btn" id="save-btn-${product.id}" style="display: none;" onclick="saveProductPrice(${product.id})">Save</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn" onclick="editProduct(${product.id})">✏️</button>
+                            <button class="action-btn delete" onclick="deleteProduct(${product.id})">🗑️</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function showOfferSaveButton(productId, inputElement) {
+            const saveBtn = document.getElementById(`offer-save-btn-${productId}`);
+            console.log(`Show offer save button for product ${productId}, button found:`, !!saveBtn);
+            
+            if (saveBtn) {
+                saveBtn.style.display = 'inline-flex';
+                // Highlight the input field to show it's been modified
+                inputElement.classList.add('modified');
+                console.log(`Save button displayed for product ${productId}`);
+            } else {
+                console.error(`Save button not found for product ${productId}`);
+            }
+        }
+
+        function saveProductOffer(productId) {
+            // Find the product row using data attributes
+            const productRow = document.querySelector(`tr[data-product-id="${productId}"]`);
+            if (!productRow) {
+                showNotification('Error: Could not find product', 'error');
+                return;
+            }
+            
+            const inputElement = productRow.querySelector('.offer-input');
+            const saveBtn = document.getElementById(`offer-save-btn-${productId}`);
+            const newOffer = parseInt(inputElement.value) || 0;
+            
+            // Update product data
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const oldOffer = product.offer;
+                product.offer = newOffer;
+                
+                // Sync with main store product data
+                syncProductOfferWithStore(product);
+                
+                // Reset input styling
+                inputElement.classList.remove('modified');
+                
+                // Hide save button
+                if (saveBtn) saveBtn.style.display = 'none';
+                
+                // Show success notification
+                if (newOffer > 0) {
+                    showNotification(`Offer updated for ${product.name}: ${oldOffer}% → ${newOffer}%`, 'success');
+                } else {
+                    showNotification(`Offer removed for ${product.name}`, 'info');
+                }
+                
+                // Update dashboard stats if needed
+                updateProductStats();
+            }
+        }
+
+        function syncProductOfferWithStore(adminProduct) {
+            // Sync offer changes with the main store
+            try {
+                // Get existing store products from localStorage
+                let storeProducts = JSON.parse(localStorage.getItem('gamezone_products') || '[]');
+                
+                // Find matching product in store
+                const storeProductIndex = storeProducts.findIndex(p => 
+                    p.name.toLowerCase().includes(adminProduct.name.toLowerCase().split(' ')[0]) ||
+                    adminProduct.name.toLowerCase().includes(p.name.toLowerCase().split(' ')[0])
+                );
+                
+                if (storeProductIndex !== -1) {
+                    // Update offer in store product
+                    const basePrice = parseFloat(adminProduct.price.replace('₹', '').replace(',', ''));
+                    storeProducts[storeProductIndex].discount = adminProduct.offer;
+                    
+                    // Calculate final price based on offer
+                    if (adminProduct.offer > 0) {
+                        storeProducts[storeProductIndex].finalPrice = basePrice * (1 - adminProduct.offer / 100);
+                        storeProducts[storeProductIndex].hasOffer = true;
+                    } else {
+                        storeProducts[storeProductIndex].finalPrice = basePrice;
+                        storeProducts[storeProductIndex].hasOffer = false;
+                    }
+                    
+                    // Save back to localStorage
+                    localStorage.setItem('gamezone_products', JSON.stringify(storeProducts));
+                    
+                    console.log(`Synced offer for ${adminProduct.name}: ${adminProduct.offer}%`);
+                }
+                
+                // Also update in offers collection
+                updateProductInStoreOffers(adminProduct);
+                
+            } catch (error) {
+                console.error('Error syncing offer with store:', error);
+                showNotification('Error syncing offer with store', 'error');
+            }
+        }
+
+        function updateProductInStoreOffers(adminProduct) {
+            try {
+                // Get existing offers
+                let offers = JSON.parse(localStorage.getItem('gamezone_offers') || '[]');
+                
+                if (adminProduct.offer > 0) {
+                    // Add or update offer for this product
+                    const basePrice = parseFloat(adminProduct.price.replace('₹', '').replace(',', ''));
+                    const finalPrice = basePrice * (1 - adminProduct.offer / 100);
+                    
+                    const existingOfferIndex = offers.findIndex(offer => 
+                        offer.title && offer.title.toLowerCase().includes(adminProduct.name.toLowerCase().split(' ')[0])
+                    );
+                    
+                    const offerData = {
+                        id: `offer_${adminProduct.id}`,
+                        title: `${adminProduct.offer}% OFF - ${adminProduct.name}`,
+                        description: `Special discount on ${adminProduct.name}`,
+                        discount: adminProduct.offer,
+                        finalPrice: finalPrice,
+                        originalPrice: basePrice,
+                        applicableProducts: [adminProduct.name],
+                        productDetails: {
+                            [adminProduct.name]: {
+                                price: basePrice,
+                                finalPrice: finalPrice,
+                                category: adminProduct.category,
+                                discount: adminProduct.offer
+                            }
+                        },
+                        startDate: new Date().toISOString(),
+                        endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+                        isActive: true,
+                        type: 'product-specific'
+                    };
+                    
+                    if (existingOfferIndex !== -1) {
+                        offers[existingOfferIndex] = offerData;
+                    } else {
+                        offers.push(offerData);
+                    }
+                } else {
+                    // Remove offer for this product
+                    offers = offers.filter(offer => 
+                        !(offer.applicableProducts && 
+                          offer.applicableProducts.some(p => p.toLowerCase().includes(adminProduct.name.toLowerCase().split(' ')[0])))
+                    );
+                }
+                
+                // Save updated offers
+                localStorage.setItem('gamezone_offers', JSON.stringify(offers));
+                
+            } catch (error) {
+                console.error('Error updating store offers:', error);
+            }
+        }
+
+        function showSaveButton(productId, inputElement) {
+            const saveBtn = document.getElementById(`save-btn-${productId}`);
+            if (saveBtn) {
+                saveBtn.style.display = 'inline-flex';
+                // Highlight the input field to show it's been modified
+                inputElement.style.border = '2px solid var(--accent)';
+                inputElement.style.background = 'rgba(139, 92, 246, 0.1)';
+            }
+        }
+
+        function saveProductPrice(productId) {
+            // Find the product row using data attributes
+            const productRow = document.querySelector(`tr[data-product-id="${productId}"]`);
+            if (!productRow) {
+                showNotification('Error: Could not find product', 'error');
+                return;
+            }
+            
+            const inputElement = productRow.querySelector('.price-input');
+            const saveBtn = document.getElementById(`save-btn-${productId}`);
+            const newPrice = inputElement.value;
+            
+            // Update product data
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const oldPrice = product.price;
+                product.price = newPrice;
+                
+                // Sync with main store product data
+                syncProductWithStore(product);
+                
+                // Reset input styling
+                inputElement.style.border = '';
+                inputElement.style.background = '';
+                
+                // Hide save button
+                if (saveBtn) saveBtn.style.display = 'none';
+                
+                // Show success notification
+                showNotification(`Price updated for ${product.name}: ${oldPrice} → ${newPrice}`, 'success');
+                
+                // Update dashboard stats if needed
+                updateProductStats();
+            }
+        }
+
+        function syncProductWithStore(adminProduct) {
+            // Sync price changes with the main store
+            try {
+                // Get existing store products from localStorage
+                let storeProducts = JSON.parse(localStorage.getItem('gamezone_products') || '[]');
+                
+                // Find matching product in store (by name or create mapping)
+                const storeProductIndex = storeProducts.findIndex(p => 
+                    p.name.toLowerCase().includes(adminProduct.name.toLowerCase().split(' ')[0]) ||
+                    adminProduct.name.toLowerCase().includes(p.name.toLowerCase().split(' ')[0])
+                );
+                
+                if (storeProductIndex !== -1) {
+                    // Update existing store product price
+                    const numericPrice = parseFloat(adminProduct.price.replace('₹', '').replace(',', ''));
+                    storeProducts[storeProductIndex].price = numericPrice;
+                    
+                    // Update final price if there are discounts
+                    if (storeProducts[storeProductIndex].discount) {
+                        storeProducts[storeProductIndex].finalPrice = numericPrice * (1 - storeProducts[storeProductIndex].discount / 100);
+                    } else {
+                        storeProducts[storeProductIndex].finalPrice = numericPrice;
+                    }
+                    
+                    // Save back to localStorage
+                    localStorage.setItem('gamezone_products', JSON.stringify(storeProducts));
+                    
+                    // Trigger store refresh if on store page
+                    if (typeof window.gameZoneData !== 'undefined') {
+                        window.gameZoneData.refreshProducts();
+                    }
+                    
+                    console.log(`Synced price for ${adminProduct.name}: ${adminProduct.price}`);
+                } else {
+                    // Create new product entry if not found
+                    const numericPrice = parseFloat(adminProduct.price.replace('₹', '').replace(',', ''));
+                    const newStoreProduct = {
+                        id: adminProduct.id,
+                        name: adminProduct.name,
+                        price: numericPrice,
+                        finalPrice: numericPrice,
+                        category: adminProduct.category.toLowerCase(),
+                        image: `images/product-${adminProduct.id}.jpg`,
+                        description: adminProduct.description,
+                        stock: adminProduct.stock,
+                        rating: 4.5,
+                        reviews: Math.floor(Math.random() * 100) + 50
+                    };
+                    
+                    storeProducts.push(newStoreProduct);
+                    localStorage.setItem('gamezone_products', JSON.stringify(storeProducts));
+                    
+                    console.log(`Created new store product for ${adminProduct.name}`);
+                }
+                
+                // Also update offers if this product is in any active offers
+                updateProductInOffers(adminProduct);
+                
+            } catch (error) {
+                console.error('Error syncing product with store:', error);
+                showNotification('Error syncing price with store', 'error');
+            }
+        }
+
+        function updateProductInOffers(adminProduct) {
+            try {
+                // Get existing offers
+                let offers = JSON.parse(localStorage.getItem('gamezone_offers') || '[]');
+                
+                // Update offers that contain this product
+                offers = offers.map(offer => {
+                    if (offer.applicableProducts && 
+                        offer.applicableProducts.some(p => p.toLowerCase().includes(adminProduct.name.toLowerCase().split(' ')[0]))) {
+                        
+                        // Update the product price in the offer
+                        const numericPrice = parseFloat(adminProduct.price.replace('₹', '').replace(',', ''));
+                        const productIndex = offer.applicableProducts.findIndex(p => 
+                            p.toLowerCase().includes(adminProduct.name.toLowerCase().split(' ')[0])
+                        );
+                        
+                        if (productIndex !== -1) {
+                            // Update product details in offer
+                            if (!offer.productDetails) offer.productDetails = {};
+                            offer.productDetails[adminProduct.name] = {
+                                price: numericPrice,
+                                finalPrice: numericPrice * (1 - offer.discount / 100),
+                                category: adminProduct.category
+                            };
+                        }
+                    }
+                    return offer;
+                });
+                
+                // Save updated offers
+                localStorage.setItem('gamezone_offers', JSON.stringify(offers));
+                
+            } catch (error) {
+                console.error('Error updating offers:', error);
+            }
+        }
+
+        function updateProductPrice(productId, newPrice) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                product.price = newPrice;
+                showNotification('Product price updated', 'success');
+            }
+        }
+
+        function updateProductStock(productId, newStock) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                product.stock = parseInt(newStock);
+                showNotification('Product stock updated', 'success');
+                updateProductStats();
+            }
+        }
+
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                showNotification(`Editing ${product.name}`, 'info');
+                // Here you could open a modal with product details
+            }
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products = products.filter(p => p.id !== productId);
+                renderProducts();
+                updateProductStats();
+                showNotification('Product deleted successfully', 'success');
+            }
+        }
+
+        function addNewProduct() {
+            showNotification('Add Product feature coming soon!', 'info');
+            // Here you could open a modal to add a new product
+        }
+
+        function updateProductStats() {
+            const totalProducts = products.length;
+            const activeProducts = products.filter(p => p.status === 'active').length;
+            const lowStockItems = products.filter(p => p.stock < 10 && p.stock > 0).length;
+            
+            // Update the stats cards
+            const statCards = document.querySelectorAll('.stat-card');
+            if (statCards.length >= 3) {
+                statCards[1].querySelector('.stat-value').textContent = activeProducts;
+                statCards[2].querySelector('.stat-value').textContent = lowStockItems;
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--info)'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
         // Add ripple effect styles dynamically
         const style = document.createElement('style');
         style.textContent = `
@@ -1193,7 +1756,62 @@
                     opacity: 0;
                 }
             }
-        `;
+            
+            @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .offer-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .offer-input {
+            width: 60px;
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .offer-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .offer-input.modified {
+            border: 2px solid var(--accent);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .offer-percent {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .offer-save-btn {
+            font-size: 10px;
+            padding: 3px 6px;
+            min-width: 45px;
+            margin-top: 4px;
+            animation: slideIn 0.3s ease;
+        }`;
         document.head.appendChild(style);
     </script>
 </body>
