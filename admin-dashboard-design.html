@@ -775,7 +775,7 @@
 
                     <!-- Stats Grid -->
                     <div class="stats-grid">
-                    <div class="stat-card">
+                    <div class="stat-card primary">
                         <div class="stat-header">
                             <span class="stat-title">Total Revenue</span>
                             <div class="stat-icon">💰</div>
@@ -787,9 +787,12 @@
                             </svg>
                             12.5% from last month
                         </div>
+                        <div class="stat-sparkline">
+                            <canvas id="revenueSparkline" width="100" height="30"></canvas>
+                        </div>
                     </div>
 
-                    <div class="stat-card success">
+                    <div class="stat-card accent">
                         <div class="stat-header">
                             <span class="stat-title">Total Orders</span>
                             <div class="stat-icon">📦</div>
@@ -799,25 +802,34 @@
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7 14l5-5 5 5z"/>
                             </svg>
-                            8.2% from last month
+                            8.3% from last month
+                        </div>
+                        <div class="stat-sparkline">
+                            <canvas id="ordersSparkline" width="100" height="30"></canvas>
                         </div>
                     </div>
 
-                    <div class="stat-card warning">
+                    <div class="stat-card success">
                         <div class="stat-header">
                             <span class="stat-title">Active Products</span>
                             <div class="stat-icon">🎮</div>
                         </div>
                         <div class="stat-value">156</div>
-                        <div class="stat-change negative">
+                        <div class="stat-change positive">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M7 10l5 5 5-5z"/>
+                                <path d="M7 14l5-5 5 5z"/>
                             </svg>
-                            2.1% from last month
+                            3 new this week
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%;"></div>
+                            </div>
+                            <span class="progress-text">78% active</span>
                         </div>
                     </div>
 
-                    <div class="stat-card success">
+                    <div class="stat-card info">
                         <div class="stat-header">
                             <span class="stat-title">Products Sold</span>
                             <div class="stat-icon">📈</div>
@@ -829,9 +841,12 @@
                             </svg>
                             18% from last month
                         </div>
+                        <div class="stat-sparkline">
+                            <canvas id="salesSparkline" width="100" height="30"></canvas>
+                        </div>
                     </div>
 
-                    <div class="stat-card info">
+                    <div class="stat-card warning">
                         <div class="stat-header">
                             <span class="stat-title">Top Seller</span>
                             <div class="stat-icon">🏆</div>
@@ -842,6 +857,136 @@
                                 <path d="M7 14l5-5 5 5z"/>
                             </svg>
                             523 units sold
+                        </div>
+                        <div class="stat-badge">Best Performer</div>
+                    </div>
+
+                    <div class="stat-card secondary">
+                        <div class="stat-header">
+                            <span class="stat-title">Low Stock Alert</span>
+                            <div class="stat-icon">⚠️</div>
+                        </div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-change negative">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                            Need restock
+                        </div>
+                        <div class="stat-action">
+                            <button class="btn btn-sm btn-outline" onclick="showSection('products')">View Products</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Section -->
+                <div class="quick-actions-section">
+                    <h2 class="section-title">Quick Actions</h2>
+                    <div class="quick-actions-grid">
+                        <div class="quick-action-card" onclick="addNewProduct()">
+                            <div class="action-icon">➕</div>
+                            <div class="action-title">Add Product</div>
+                            <div class="action-desc">List new item</div>
+                        </div>
+                        <div class="quick-action-card" onclick="showSection('orders')">
+                            <div class="action-icon">📋</div>
+                            <div class="action-title">View Orders</div>
+                            <div class="action-desc">Manage orders</div>
+                        </div>
+                        <div class="quick-action-card" onclick="showSection('customers')">
+                            <div class="action-icon">👥</div>
+                            <div class="action-title">Customers</div>
+                            <div class="action-desc">View users</div>
+                        </div>
+                        <div class="quick-action-card" onclick="generateReport()">
+                            <div class="action-icon">📊</div>
+                            <div class="action-title">Reports</div>
+                            <div class="action-desc">Analytics</div>
+                        </div>
+                        <div class="quick-action-card" onclick="showSection('settings')">
+                            <div class="action-icon">⚙️</div>
+                            <div class="action-title">Settings</div>
+                            <div class="action-desc">Configure</div>
+                        </div>
+                        <div class="quick-action-card" onclick="exportData()">
+                            <div class="action-icon">💾</div>
+                            <div class="action-title">Export</div>
+                            <div class="action-desc">Download data</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity & Performance -->
+                <div class="dashboard-row">
+                    <div class="activity-section">
+                        <h2 class="section-title">Recent Activity</h2>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon success">✓</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">New order received</div>
+                                    <div class="activity-desc">RGB Gaming Keyboard - Order #1248</div>
+                                    <div class="activity-time">2 minutes ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon info">🔄</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Product price updated</div>
+                                    <div class="activity-desc">Gaming Chair: ₹15,999 → ₹14,999</div>
+                                    <div class="activity-time">15 minutes ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon warning">⚠️</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Low stock alert</div>
+                                    <div class="activity-desc">Mechanical Keyboard Pro: 5 units left</div>
+                                    <div class="activity-time">1 hour ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon success">🎉</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">New product added</div>
+                                    <div class="activity-desc">Gaming Monitor 27" 144Hz</div>
+                                    <div class="activity-time">2 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon info">🏷️</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Offer created</div>
+                                    <div class="activity-desc">25% OFF on Gaming Mouse Pad</div>
+                                    <div class="activity-time">3 hours ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="performance-section">
+                        <h2 class="section-title">Performance Overview</h2>
+                        <div class="performance-metrics">
+                            <div class="metric-card">
+                                <div class="metric-label">Conversion Rate</div>
+                                <div class="metric-value">3.2%</div>
+                                <div class="metric-change positive">+0.4%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Avg. Order Value</div>
+                                <div class="metric-value">₹3,891</div>
+                                <div class="metric-change positive">+12%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Customer Rating</div>
+                                <div class="metric-value">4.6⭐</div>
+                                <div class="metric-change positive">+0.2</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Return Rate</div>
+                                <div class="metric-value">2.1%</div>
+                                <div class="metric-change negative">-0.3%</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1014,7 +1159,133 @@
         document.addEventListener('DOMContentLoaded', function() {
             renderProducts();
             updateProductStats();
+            initializeDashboard();
         });
+
+        function initializeDashboard() {
+            drawSparklines();
+            updateDashboardTime();
+            setInterval(updateDashboardTime, 60000); // Update every minute
+        }
+
+        function drawSparklines() {
+            drawRevenueSparkline();
+            drawOrdersSparkline();
+            drawSalesSparkline();
+        }
+
+        function drawRevenueSparkline() {
+            const canvas = document.getElementById('revenueSparkline');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const data = [28000, 32000, 29000, 35000, 33000, 38000, 42000];
+            const maxValue = Math.max(...data);
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#8b5cf6';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            data.forEach((value, index) => {
+                const x = (index / (data.length - 1)) * canvas.width;
+                const y = canvas.height - (value / maxValue) * canvas.height;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+            
+            ctx.stroke();
+        }
+
+        function drawOrdersSparkline() {
+            const canvas = document.getElementById('ordersSparkline');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const data = [120, 145, 130, 160, 155, 180, 195];
+            const maxValue = Math.max(...data);
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#06b6d4';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            data.forEach((value, index) => {
+                const x = (index / (data.length - 1)) * canvas.width;
+                const y = canvas.height - (value / maxValue) * canvas.height;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+            
+            ctx.stroke();
+        }
+
+        function drawSalesSparkline() {
+            const canvas = document.getElementById('salesSparkline');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const data = [450, 520, 480, 580, 550, 620, 680];
+            const maxValue = Math.max(...data);
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            data.forEach((value, index) => {
+                const x = (index / (data.length - 1)) * canvas.width;
+                const y = canvas.height - (value / maxValue) * canvas.height;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+            
+            ctx.stroke();
+        }
+
+        function updateDashboardTime() {
+            // Update relative times in activity feed
+            const activityTimes = document.querySelectorAll('.activity-time');
+            // This would normally calculate real relative times
+        }
+
+        function generateReport() {
+            showNotification('Generating sales report...', 'info');
+            setTimeout(() => {
+                showNotification('Report generated successfully!', 'success');
+            }, 2000);
+        }
+
+        function exportData() {
+            showNotification('Preparing data export...', 'info');
+            setTimeout(() => {
+                // Create CSV export
+                const csvContent = products.map(p => 
+                    `${p.name},${p.price},${p.stock},${p.category},${p.offer}%`
+                ).join('\n');
+                
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'products_export.csv';
+                a.click();
+                
+                showNotification('Data exported successfully!', 'success');
+            }, 1000);
+        }
 
         // Interactive Dashboard Functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -1811,6 +2082,258 @@
             min-width: 45px;
             margin-top: 4px;
             animation: slideIn 0.3s ease;
+        }
+
+        /* Enhanced Dashboard Styles */
+        .quick-actions-section {
+            margin-top: 30px;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .quick-action-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .action-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .action-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .action-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .dashboard-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .activity-section, .performance-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .activity-icon.success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .activity-icon.info {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--info);
+        }
+
+        .activity-icon.warning {
+            background: rgba(251, 146, 60, 0.2);
+            color: var(--warning);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .activity-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .activity-time {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .metric-card {
+            background: var(--bg-primary);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .metric-change {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .metric-change.positive {
+            color: var(--success);
+        }
+
+        .metric-change.negative {
+            color: var(--danger);
+        }
+
+        /* Enhanced Stats Cards */
+        .stat-sparkline {
+            margin-top: 12px;
+            height: 30px;
+        }
+
+        .stat-progress {
+            margin-top: 12px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--accent));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .stat-badge {
+            display: inline-block;
+            background: rgba(251, 146, 60, 0.2);
+            color: var(--warning);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .stat-action {
+            margin-top: 12px;
+        }
+
+        .stat-change.negative {
+            color: var(--danger);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--border);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .dashboard-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .performance-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }`;
         document.head.appendChild(style);
     </script>
