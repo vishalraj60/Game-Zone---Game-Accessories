@@ -189,7 +189,88 @@
       <!-- Products will be dynamically loaded here directly -->
     </section>
 
+    <!-- Buy Now Section (Modal) -->
+    <div id="buyNowModal" class="buy-now-modal" style="display: none;">
+      <div class="buy-now-content">
+        <button class="buy-now-close" onclick="closeBuyNowModal()">&times;</button>
+        
+        <div class="buy-now-header">
+          <h2>Complete Your Purchase</h2>
+          <p>Review your order and proceed to checkout</p>
+        </div>
 
+        <div class="buy-now-product">
+          <img id="buyProductImage" src="" alt="Product">
+          <div class="buy-product-info">
+            <h3 id="buyProductName">Product Name</h3>
+            <p class="buy-product-price">
+              <span id="buyProductPrice">₹0</span>
+              <span class="buy-original-price" id="buyOriginalPrice"></span>
+              <span class="buy-discount" id="buyDiscount"></span>
+            </p>
+            <p class="buy-stock-status" id="buyStockStatus">In Stock</p>
+          </div>
+        </div>
+
+        <div class="buy-options">
+          <div class="quantity-selector">
+            <label>Quantity:</label>
+            <div class="qty-controls">
+              <button onclick="decreaseQty()">-</button>
+              <input type="number" id="buyQuantity" value="1" min="1" max="10" readonly>
+              <button onclick="increaseQty()">+</button>
+            </div>
+          </div>
+
+          <div class="delivery-options">
+            <h4>Delivery Options</h4>
+            <div class="delivery-option selected">
+              <input type="radio" name="delivery" id="standard" checked>
+              <label for="standard">
+                <strong>Standard Delivery</strong>
+                <span>Free • 5-7 days</span>
+              </label>
+            </div>
+            <div class="delivery-option">
+              <input type="radio" name="delivery" id="express">
+              <label for="express">
+                <strong>Express Delivery</strong>
+                <span>₹99 • 2-3 days</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="buy-summary">
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span id="subtotalPrice">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery:</span>
+            <span id="deliveryPrice">Free</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total:</span>
+            <span id="totalPrice">₹0</span>
+          </div>
+        </div>
+
+        <div class="buy-actions">
+          <button class="btn buy-checkout-btn" onclick="proceedToCheckout()">
+            <span>Proceed to Checkout</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <button class="btn buy-add-cart-btn" onclick="addToCartFromBuySection()">
+            Add to Cart Instead
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="buy-now-overlay" id="buyOverlay" onclick="closeBuyNowModal()" style="display: none;"></div>
 
     <footer class="site-footer">
       <div class="footer-grid">

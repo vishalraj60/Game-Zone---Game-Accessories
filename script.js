@@ -1,10 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Check if user is logged in, if not redirect to landing page
-  if (!checkLoginStatus()) {
-    window.location.href = 'landingpage.html';
-    return;
-  }
-  
   // Check admin access
   checkAdminAccess();
   
@@ -75,7 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
                   ${product.stock <= 0 ? 'disabled' : ''}>
             ${product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
           </button>
-          <button class="btn view-details" onclick="viewProductDetails(${product.id})">View Details</button>
+          <div class="button-row">
+            <button class="btn buy-now ${product.stock <= 0 ? 'disabled' : ''}" 
+                    onclick="buyNow(${product.id})" 
+                    ${product.stock <= 0 ? 'disabled' : ''}>
+              Buy Now
+            </button>
+            <button class="btn view-details" onclick="viewProductDetails(${product.id})">View Details</button>
+          </div>
         </div>
       `;
       
@@ -109,6 +110,29 @@ document.addEventListener('DOMContentLoaded', function () {
   
   // Make functions global
   window.viewProductDetails = viewProductDetails;
+  
+  // Buy Now function - opens buy page
+  function buyNow(productId) {
+    const product = window.gameZoneData.getProduct(productId);
+    if (!product) {
+      showNotification('Product not found', 'error');
+      return;
+    }
+    
+    if (product.stock <= 0) {
+      showNotification('Product is out of stock', 'error');
+      return;
+    }
+    
+    // Store product in localStorage for buy page
+    localStorage.setItem('buyNowProduct', JSON.stringify(product));
+    
+    // Open buy page
+    window.location.href = `buy-now.html?id=${productId}`;
+  }
+  
+  // Make buyNow function global
+  window.buyNow = buyNow;
   
   // Initialize cart from localStorage
   function initializeCart() {
