@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameZone - Welcome</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,21 +16,23 @@
         }
 
         :root {
-            --bg-primary: #0a0e27;
-            --bg-secondary: #151932;
-            --accent: #8b5cf6;
-            --accent-2: #6d28d9;
+            --bg-primary: #121316;
+            --bg-secondary: #1a1c20;
+            --accent: #00d4ff;
+            --accent-2: #8b5cf6;
             --text-primary: #ffffff;
-            --text-secondary: #b8bcc8;
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-secondary: #a0a5b5;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #ffffff;
+            background: radial-gradient(circle at 80% 20%, #1e2129 0%, #0c0d0e 100%);
             min-height: 100vh;
-            color: #071024;
+            color: var(--text-primary);
             overflow-x: hidden;
+            position: relative;
         }
 
         /* Header */
@@ -37,11 +41,9 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 20px 40px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);
-            backdrop-filter: blur(12px);
+            padding: 30px 80px;
+            background: transparent;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-content {
@@ -59,67 +61,293 @@
         }
 
         .logo {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .logo-icon {
-            width: 100%;
-            height: 100%;
+        .logo-icon .orbit {
+            stroke: var(--accent);
+        }
+
+        .logo-icon .planet {
+            fill: var(--accent);
+        }
+
+        .logo-icon text {
+            fill: #ffffff;
         }
 
         .brand-text h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 28px;
-            color: #071024;
+            font-size: 24px;
+            color: #ffffff;
             margin: 0;
+            line-height: 1.2;
         }
 
         .brand-text p {
-            color: #000000;
-            font-size: 14px;
+            color: var(--text-secondary);
+            font-size: 11px;
             margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Navigation menu matching Logitech style */
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link:hover {
+            color: #00d4ff;
+        }
+
+        .nav-link.active {
+            color: var(--accent);
         }
 
         .auth-buttons {
             display: flex;
-            gap: 15px;
+            align-items: center;
+            gap: 20px;
         }
 
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
+        .btn-login {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
             font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .btn-login:hover {
+            color: #ffffff;
+        }
+
+        .btn-signup {
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-signup:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Navigation bar animated image ticker */
+        .nav-ticker {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            width: 250px;
+            height: 40px;
+            margin: 0 25px;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, #fff 15%, #fff 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, #fff 15%, #fff 85%, transparent);
+        }
+
+        .ticker-track {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: max-content;
+            animation: scrollTicker 16s linear infinite;
+        }
+
+        /* Pause animation on hover */
+        .nav-ticker:hover .ticker-track {
+            animation-play-state: paused;
+        }
+
+        .ticker-track img {
+            height: 24px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%) opacity(0.5);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+
+        .ticker-track img:hover {
+            filter: grayscale(0%) opacity(1) drop-shadow(0 0 8px var(--accent));
+            transform: scale(1.2);
+        }
+
+        @keyframes scrollTicker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Floating Margin Elements */
+        .left-dots {
+            position: fixed;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .dot-nav {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
+            position: relative;
         }
 
-        .btn-outline {
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid rgb(122, 63, 249);
+        .dot-nav:hover {
+            background: rgba(255, 255, 255, 0.8);
         }
 
-        .btn-outline:hover {
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            transform: translateY(-2px);
-            color: rgb(255, 255, 255);
-            box-shadow: 0 10px 20px rgba(158, 124, 238, 0.3);
+        .dot-nav.active {
+            background: var(--accent);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: white;
-            border: none;
+        .dot-nav.active::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            animation: dotPulse 2s infinite ease-in-out;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
+        @keyframes dotPulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            left: 50px;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .scroll-text {
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .scroll-arrow {
+            width: 1px;
+            height: 35px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+            position: relative;
+        }
+
+        .scroll-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -2px;
+            width: 5px;
+            height: 5px;
+            border-left: 1px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            transform: rotate(-45deg);
+        }
+
+        .right-socials {
+            position: fixed;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .social-link {
+            color: rgba(255, 255, 255, 0.4);
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .page-number {
+            position: absolute;
+            right: 15%;
+            bottom: 8%;
+            font-size: 28px;
+            font-weight: 700;
+            z-index: 10;
+            letter-spacing: 1px;
+            user-select: none;
+        }
+
+        .page-number .current {
+            color: var(--accent);
+        }
+
+        .page-number .total {
+            color: rgba(255, 255, 255, 0.3);
         }
 
         /* Hero Section */
@@ -127,135 +355,645 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            padding: 100px 10% 40px 10%;
+            position: relative;
+            background: transparent;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-left {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 212, 255, 0.05));
-        }
-
-        /* Hero Image */
-        .hero-image {
-            position:absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-content {
-            position: relative;
             z-index: 10;
-            text-align: center;
-            color: #fefefe;
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(12px);
-            max-width: 800px;
-            margin: 20px auto;
+            padding-left: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            line-height: 1.5;
+            max-width: 480px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--accent), #00d4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #ffffff;
+            line-height: 1.05;
+            letter-spacing: -1px;
         }
 
         .hero p {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            margin-bottom: 30px;
-            color: #071024;
-            margin-right: auto;
+            font-size: 15px;
             line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 480px;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .btn-play {
+            padding: 14px 38px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1.5px solid var(--accent);
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+
+        .btn-play:hover {
+            background: var(--accent);
+            color: #0c0d0e;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-learn {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .btn-learn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .btn-learn:hover {
+            color: #ffffff;
+        }
+
+        .btn-learn:hover::after {
+            width: 100%;
+        }
+
+        /* Mouse Showcase (Right Column) */
+        .hero-right {
+            flex: 1.2;
+            position: relative;
+            height: 550px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
+            z-index: 5;
         }
 
-        .btn-large {
-            padding: 16px 32px;
-            font-size: 16px;
-            border-radius: 12px;
+        .mouse-showcase {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Features Grid */
-        .features {
-            padding: 80px 40px;
+        .mouse-main {
+            width: 390px;
+            height: auto;
+            position: absolute;
+            left: 10%;
+            top: 10%;
+            z-index: 2;
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6));
+            animation: mouseFloatMain 6s ease-in-out infinite;
+        }
+
+        .mouse-detail {
+            width: 250px;
+            height: auto;
+            position: absolute;
+            right: 0%;
+            top: 25%;
+            z-index: 1;
+            filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.5));
+            animation: mouseFloatDetail 6s ease-in-out infinite 0.7s;
+        }
+
+        @keyframes mouseFloatMain {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(1deg);
+            }
+        }
+
+        @keyframes mouseFloatDetail {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        /* Annotations */
+        .annotation {
+            position: absolute;
+            z-index: 10;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1.2s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .annot-sensor {
+            top: 180px;
+            left: 310px;
+        }
+
+        .annot-wheel {
+            top: 230px;
+            left: 421px;
+        }
+
+        .annot-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .annot-dot::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            animation: dotPulse 2s infinite ease-in-out;
+        }
+
+        /* Pointer line using SVG paths */
+        .annotation-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .svg-line {
+            stroke: rgba(255, 255, 255, 0.25);
+            stroke-width: 1;
+            fill: none;
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: drawLine 2s forwards 1.5s;
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .annot-label {
+            position: absolute;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.6);
+            white-space: nowrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 4px;
+        }
+
+        .label-sensor {
+            top: 92px;
+            left: 385px;
+        }
+
+        .label-wheel {
+            top: 132px;
+            right: 245px;
+        }
+
+        /* Products Showcase Section */
+        .products-showcase {
+            padding: 100px 80px;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .products-showcase h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .products-showcase > p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .showcase-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            padding: 50px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .showcase-spotlight {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            min-height: 380px;
+        }
+
+        .spotlight-bg {
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .spotlight-img {
+            max-width: 280px;
+            max-height: 280px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            z-index: 2;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
+            animation: floatProduct 5s ease-in-out infinite;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .spotlight-img.exit-left {
+            transform: translateX(-60px) scale(0.85);
+            opacity: 0;
+        }
+
+        .spotlight-img.enter-right {
+            transform: translateX(60px) scale(0.85);
+            opacity: 0;
+        }
+
+        @keyframes floatProduct {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        .showcase-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 2;
+            transition: all 0.4s ease;
+            flex: 1;
+        }
+
+        .showcase-badge {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            padding: 5px 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .showcase-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 15px 0;
+            line-height: 1.2;
+        }
+
+        .showcase-desc {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin: 0 0 25px 0;
+        }
+
+        .showcase-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .spec-tag {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .spec-tag:hover {
+            border-color: rgba(0, 212, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .showcase-btn {
+            padding: 12px 30px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1.5px solid var(--accent);
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+
+        .showcase-btn:hover {
+            background: var(--accent);
+            color: #0c0d0e;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Showcase selector list */
+        .showcase-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .product-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .product-card:hover {
+            transform: translateX(6px);
+            border-color: rgba(0, 212, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .product-card.active {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.05);
+        }
+
+        .card-img-wrap {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-card.active .card-img-wrap {
+            background: rgba(0, 212, 255, 0.05);
+            border-color: rgba(0, 212, 255, 0.25);
+        }
+
+        .product-card img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            filter: grayscale(100%) opacity(0.5);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover img,
+        .product-card.active img {
+            filter: grayscale(0%) opacity(1);
+        }
+
+        .card-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+        }
+
+        .product-card:hover .card-title,
+        .product-card.active .card-title {
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .product-card:hover .card-subtitle,
+        .product-card.active .card-subtitle {
+            color: var(--accent);
+        }
+
+        @media (max-width: 992px) {
+            .showcase-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 30px;
+            }
+            .products-showcase {
+                padding: 80px 40px;
+            }
+            .spotlight-bg {
+                width: 300px;
+                height: 300px;
+            }
+            .spotlight-img {
+                max-width: 220px;
+                max-height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-showcase {
+                padding: 60px 20px;
+            }
+            .showcase-title {
+                font-size: 26px;
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .features h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .features p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 50px;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            margin-top: 50px;
         }
 
         .feature-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(10px);
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+            transform: translateY(-8px);
+            border-color: rgba(0, 212, 255, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.05);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            width: 50px;
+            height: 50px;
+            margin: 0 0 25px 0;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(0, 212, 255, 0.2);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--accent);
+            color: #0c0d0e;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
         .feature-card h3 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: #071024;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
         }
 
         .feature-card p {
-            color: #071024;
+            color: var(--text-secondary);
+            font-size: 14px;
             line-height: 1.6;
+            margin: 0;
         }
 
-        
-        /* Footer Styles */
+        /* Footer */
         .site-footer {
-            background: linear-gradient(135deg, #151932, #0a0e27);
-            color: var(--text-primary);
-            padding: 60px 40px 20px;
-            margin-top: 80px;
+            background: #0b0c0e;
+            color: #ffffff;
+            padding: 80px 80px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+            z-index: 10;
         }
 
         .footer-grid {
@@ -264,117 +1002,269 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
             gap: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         .footer-brand {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
 
         .footer-title {
             font-family: 'Pacifico', cursive;
             font-size: 24px;
-            color: var(--accent);
+            color: #ffffff;
         }
 
         .footer-subtitle {
-            font-size: 14px;
-            color: var(--text-secondary);
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .footer-desc {
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.6;
             color: var(--text-secondary);
-            max-width: 300px;
+            max-width: 280px;
         }
 
         .footer-col {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
 
         .footer-heading {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         .footer-link {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
+            font-size: 13px;
+            transition: all 0.3s ease;
         }
 
         .footer-link:hover {
             color: var(--accent);
+            padding-left: 2px;
         }
 
         .footer-bottom {
             max-width: 1200px;
             margin: 0 auto;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .footer-copy {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
         }
 
         .footer-legal {
             display: flex;
-            gap: 20px;
+            gap: 25px;
         }
 
         .footer-legal .footer-link {
-            font-size: 13px;
+            font-size: 12px;
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            header {
+                padding: 20px 40px;
+            }
+
+            .hero {
+                padding: 100px 5% 40px 5%;
+            }
+
+            .left-dots,
+            .right-socials,
+            .scroll-indicator {
+                display: none;
+            }
+
+            .page-number {
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-ticker {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                min-height: auto;
+                padding-top: 140px;
+                gap: 60px;
+            }
+
+            .hero-left {
+                align-items: center;
+                padding: 0;
+            }
+
+            .hero-subtitle,
+            .hero p {
+                max-width: 600px;
+            }
+
+            .hero-right {
+                width: 100%;
+                max-width: 550px;
+                height: 450px;
+            }
+
+            .mouse-main {
+                width: 320px;
+                left: 5%;
+            }
+
+            .mouse-detail {
+                width: 200px;
+            }
+
+            .label-sensor {
+                top: 70px;
+                left: 310px;
+            }
+
+            .label-wheel {
+                top: 100px;
+                right: 90px;
+            }
+
+            .annot-sensor {
+                top: 150px;
+                left: 250px;
+            }
+
+            .annot-wheel {
+                top: 190px;
+                right: 60px;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-brand {
+                grid-column: span 3;
+                margin-bottom: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             header {
                 padding: 15px 20px;
             }
 
-            .brand-text h1 {
-                font-size: 24px;
-            }
-
-            .hero {
-                padding: 20px;
-            }
-
-            .hero-content {
-                padding: 30px 20px;
-                margin: 10px auto;
+            .nav-menu {
+                display: none;
             }
 
             .hero h1 {
-                font-size: clamp(2rem, 7vw, 3rem);
+                font-size: 44px;
             }
 
-            .hero p {
-                font-size: clamp(0.9rem, 2vw, 1rem);
+            .features {
+                padding: 60px 20px;
             }
 
-            .btn-large {
+            .site-footer {
+                padding: 60px 20px 30px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: span 2;
+            }
+
+            .hero-right {
+                height: 380px;
+            }
+
+            .mouse-main {
+                width: 250px;
+            }
+
+            .mouse-detail {
                 width: 160px;
-                padding: 12px 0;
+            }
+
+            .annotation,
+            .annotation-svg,
+            .annot-label {
+                display: none;
             }
         }
     </style>
 </head>
+
 <body>
-    
+
+    <!-- Floating Margins -->
+    <div class="left-dots">
+        <div class="dot-nav active"></div>
+        <div class="dot-nav"></div>
+        <div class="dot-nav"></div>
+        <div class="dot-nav"></div>
+    </div>
+
+    <div class="scroll-indicator">
+        <span class="scroll-text">Scroll</span>
+        <div class="scroll-arrow"></div>
+    </div>
+
+    <div class="right-socials">
+        <a href="#" class="social-link" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Twitter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                    d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+            </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="VK">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.84 12.83c-.35.19-.74.3-1.14.3H14.1c-.26 0-.48-.06-.66-.18s-.33-.29-.46-.51c-.24-.41-.47-.78-.68-1.12s-.41-.62-.6-.84c-.16-.18-.32-.26-.48-.26s-.31.08-.43.25c-.17.23-.29.56-.37.97-.08.41-.12.81-.12 1.2h-.94c-.61 0-1.19-.17-1.74-.52s-.98-.86-1.3-1.54C6.98 12.06 6.55 10.98 6.13 9.7L7.1 9.6c.15.54.34 1.04.57 1.5.23.46.46.83.69 1.11.23.28.44.42.63.42.12 0 .23-.05.33-.15s.18-.28.24-.54c.08-.34.12-.76.12-1.25V9.45c0-.28-.06-.5-.18-.66-.12-.16-.32-.25-.6-.27h-.2c.1-.38.3-.68.6-.88s.66-.3 1.08-.3h.85c.34 0 .59.08.75.24s.24.41.24.75v2.24c0 .24.04.42.12.54s.18.18.3.18c.19 0 .4-.21.63-.63.23-.42.44-.9.63-1.44l.87.18c-.18.61-.43 1.15-.75 1.62-.32.47-.64.81-.96 1.02.34.34.69.75 1.05 1.23s.66.86.9 1.14c.24.28.46.42.66.42z" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="page-number">
+        <span class="current">01</span><span class="total">/05</span>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="header-content">
@@ -383,7 +1273,8 @@
                     <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
                         <circle class="orbit" cx="25" cy="25" r="15" fill="none" stroke="#071024" stroke-width="2" />
                         <circle class="planet" cx="40" cy="25" r="3" fill="#071024" />
-                        <text x="25" y="32" font-size="20" font-weight="bold" text-anchor="middle" fill="#071024">GZ</text>
+                        <text x="25" y="32" font-size="20" font-weight="bold" text-anchor="middle"
+                            fill="#071024">GZ</text>
                     </svg>
                 </div>
                 <div class="brand-text">
@@ -391,36 +1282,81 @@
                     <p>Gaming Accessories</p>
                 </div>
             </div>
+
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#features" class="nav-link">About</a></li>
+                <li><a href="#products-showcase" class="nav-link">Product</a></li>
+                <li><a href="#footer" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-ticker">
+                <div class="ticker-track">
+                    <img src="images/ps5-controller.png" alt="Controller">
+                    <img src="images/gaming-monitor.png" alt="Monitor">
+                    <img src="images/gaming-speakers.png" alt="Speakers">
+                    <img src="images/gaming-webcam.png" alt="Webcam">
+                    <img src="images/hero_mouse_main.png" alt="Mouse">
+                    <!-- Duplicate for seamless looping -->
+                    <img src="images/ps5-controller.png" alt="Controller">
+                    <img src="images/gaming-monitor.png" alt="Monitor">
+                    <img src="images/gaming-speakers.png" alt="Speakers">
+                    <img src="images/gaming-webcam.png" alt="Webcam">
+                    <img src="images/hero_mouse_main.png" alt="Mouse">
+                </div>
+            </div>
+
             <div class="auth-buttons">
-                <a href="login.html" class="btn btn-outline">Login</a>
-                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="signup.html" class="btn-signup">Sign Up</a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <!-- Landing Image -->
-        <div class="hero-image">
-            <img src="images/landing_image.png" alt="GameZone Gaming Setup">
-        </div>
-        
-        <!-- Welcome Content with Form -->
-        <div class="hero-content">
+    <section class="hero" id="hero">
+        <!-- Welcome Content -->
+        <div class="hero-left">
+            <h3 class="hero-subtitle">YOUR ULTIMATE DESTINATION FOR PREMIUM GAMING ACCESSORIES.</h3>
             <h1>Welcome to GameZone</h1>
-            <p>Your ultimate destination for premium gaming accessories. Gear up for victory with our curated collection of high-performance gaming equipment.</p>
+            <p>Gear up for victory with our curated collection of high-performance gaming equipment.</p>
             <div class="cta-buttons">
-                <a href="login.html" class="btn btn-primary btn-large">Start Shopping</a>
-                <a href="#features" class="btn btn-outline btn-large">Learn More</a>
+                <a href="login.html" class="btn-play">Start Shopping</a>
+                <a href="#features" class="btn-learn">Learn More</a>
+            </div>
+        </div>
+
+        <!-- Mouse Showcase & Annotations -->
+        <div class="hero-right">
+            <div class="mouse-showcase">
+                <img src="images/hero_mouse_main.png" alt="GameZone Mouse Main" class="mouse-main">
+                <img src="images/hero_mouse_detail.png" alt="GameZone Mouse Detail" class="mouse-detail">
+
+                <svg class="annotation-svg" viewBox="0 0 600 550">
+                    <!-- Line to Hero 16K Sensor -->
+                    <path d="M 310 180 L 350 110 L 380 110" class="svg-line" />
+                    <!-- Line to Scroll Wheel -->
+                    <path d="M 421 230 L 390 150 L 360 150" class="svg-line" />
+                </svg>
+
+                <div class="annotation annot-sensor">
+                    <div class="annot-dot"></div>
+                </div>
+                <div class="annotation annot-wheel">
+                    <div class="annot-dot"></div>
+                </div>
+
+                <div class="annot-label label-sensor">Hero 16K sensor</div>
+                <div class="annot-label label-wheel">Dual mode hyperfast scroll wheel</div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px; color: #071024;">Why Choose GameZone?</h2>
-        <p style="text-align: center; color: #071024; font-size: 1.2rem;">Discover the perfect gaming gear for your setup</p>
-        
+        <h2 style="text-align: center;">Why Choose GameZone?</h2>
+        <p style="text-align: center;">Discover the perfect gaming gear for your setup</p>
+
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🎮</div>
@@ -440,54 +1376,142 @@
         </div>
     </section>
 
-    <footer class="site-footer">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-title">GameZone</div>
-          <div class="footer-subtitle">Gaming Accessories</div>
-          <p class="footer-desc">Premium gear for competitive play. Upgrade your setup with keyboards, headsets, controllers, and more.</p>
+    <!-- Products Showcase Section -->
+    <section class="products-showcase" id="products-showcase">
+        <h2>Featuring the Elite Lineup</h2>
+        <p>Experience next-generation responsiveness, precision, and build quality.</p>
+
+        <div class="showcase-container">
+            <!-- Left Panel: Showcase Spotlight -->
+            <div class="showcase-spotlight">
+                <div class="spotlight-bg"></div>
+                <img src="images/ps5-controller.png" alt="Featured Product" class="spotlight-img" id="spotlight-img">
+                
+                <div class="showcase-details" id="showcase-details">
+                    <span class="showcase-badge" id="showcase-badge">Console & PC Gear</span>
+                    <h3 class="showcase-title" id="showcase-title">DualSense Wireless Controller</h3>
+                    <p class="showcase-desc" id="showcase-desc">Immerse yourself in the gaming experience with haptic feedback, dynamic adaptive triggers, and a built-in microphone, all integrated into an iconic comfortable design.</p>
+                    <div class="showcase-specs" id="showcase-specs">
+                        <span class="spec-tag">Haptic Feedback</span>
+                        <span class="spec-tag">Adaptive Triggers</span>
+                        <span class="spec-tag">Integrated Mic</span>
+                        <span class="spec-tag">USB-C Charging</span>
+                    </div>
+                    <a href="index.html" class="showcase-btn">Explore Gear</a>
+                </div>
+            </div>
+
+            <!-- Right Panel: Card Selectors -->
+            <div class="showcase-list">
+                <!-- Card 1 -->
+                <div class="product-card active" data-index="0">
+                    <div class="card-img-wrap">
+                        <img src="images/ps5-controller.png" alt="PS5 Controller">
+                    </div>
+                    <div class="card-text">
+                        <span class="card-subtitle">Gamepad</span>
+                        <span class="card-title">DualSense Controller</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="product-card" data-index="1">
+                    <div class="card-img-wrap">
+                        <img src="images/gaming-monitor.png" alt="Gaming Monitor">
+                    </div>
+                    <div class="card-text">
+                        <span class="card-subtitle">Display</span>
+                        <span class="card-title">Curved Monitor</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="product-card" data-index="2">
+                    <div class="card-img-wrap">
+                        <img src="images/gaming-speakers.png" alt="Gaming Speakers">
+                    </div>
+                    <div class="card-text">
+                        <span class="card-subtitle">Audio</span>
+                        <span class="card-title">LIGHTSYNC Speakers</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="product-card" data-index="3">
+                    <div class="card-img-wrap">
+                        <img src="images/gaming-webcam.png" alt="Gaming Webcam">
+                    </div>
+                    <div class="card-text">
+                        <span class="card-subtitle">Camera</span>
+                        <span class="card-title">StreamCam Pro</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="product-card" data-index="4">
+                    <div class="card-img-wrap">
+                        <img src="images/hero_mouse_main.png" alt="Gaming Mouse">
+                    </div>
+                    <div class="card-text">
+                        <span class="card-subtitle">Input</span>
+                        <span class="card-title">G604 Wireless Mouse</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <footer class="site-footer" id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-title">GameZone</div>
+                <div class="footer-subtitle">Gaming Accessories</div>
+                <p class="footer-desc">Premium gear for competitive play. Upgrade your setup with keyboards, headsets,
+                    controllers, and more.</p>
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-heading">Quick Links</div>
+                <a href="#" class="footer-link">Shop</a>
+                <a href="#" class="footer-link">New Arrivals</a>
+                <a href="#" class="footer-link">Best Sellers</a>
+                <a href="#" class="footer-link">Offers</a>
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-heading">Support</div>
+                <a href="#" class="footer-link">Contact</a>
+                <a href="#" class="footer-link">Shipping</a>
+                <a href="#" class="footer-link">Returns</a>
+                <a href="#" class="footer-link">FAQ</a>
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-heading">Account</div>
+                <a href="login.html" class="footer-link">Login</a>
+                <a href="signup.html" class="footer-link">Sign Up</a>
+                <a href="#" class="footer-link">My Profile</a>
+                <a href="admin-login.html" class="footer-link">Admin</a>
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-heading">Follow</div>
+                <a href="#" class="footer-link">Instagram</a>
+                <a href="#" class="footer-link">X</a>
+                <a href="#" class="footer-link">YouTube</a>
+                <a href="#" class="footer-link">Discord</a>
+            </div>
         </div>
 
-        <div class="footer-col">
-          <div class="footer-heading">Quick Links</div>
-          <a href="#" class="footer-link">Shop</a>
-          <a href="#" class="footer-link">New Arrivals</a>
-          <a href="#" class="footer-link">Best Sellers</a>
-          <a href="#" class="footer-link">Offers</a>
+        <div class="footer-bottom">
+            <div class="footer-copy">© <span id="footerYear"></span> GameZone. All rights reserved.</div>
+            <div class="footer-legal">
+                <a href="#" class="footer-link">Privacy</a>
+                <a href="#" class="footer-link">Terms</a>
+            </div>
         </div>
-
-        <div class="footer-col">
-          <div class="footer-heading">Support</div>
-          <a href="#" class="footer-link">Contact</a>
-          <a href="#" class="footer-link">Shipping</a>
-          <a href="#" class="footer-link">Returns</a>
-          <a href="#" class="footer-link">FAQ</a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-heading">Account</div>
-          <a href="login.html" class="footer-link">Login</a>
-          <a href="signup.html" class="footer-link">Sign Up</a>
-          <a href="#" class="footer-link">My Profile</a>
-          <a href="admin-login.html" class="footer-link">Admin</a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-heading">Follow</div>
-          <a href="#" class="footer-link">Instagram</a>
-          <a href="#" class="footer-link">X</a>
-          <a href="#" class="footer-link">YouTube</a>
-          <a href="#" class="footer-link">Discord</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="footer-copy">© <span id="footerYear"></span> GameZone. All rights reserved.</div>
-        <div class="footer-legal">
-          <a href="#" class="footer-link">Privacy</a>
-          <a href="#" class="footer-link">Terms</a>
-        </div>
-      </div>
     </footer>
 
     <script>
@@ -510,6 +1534,96 @@
                 }
             });
         });
+
+        // Products Showcase Data
+        const productsData = [
+            {
+                name: "DualSense Wireless Controller",
+                img: "images/ps5-controller.png",
+                badge: "Console & PC Gear",
+                desc: "Immerse yourself in the gaming experience with haptic feedback, dynamic adaptive triggers, and a built-in microphone, all integrated into an iconic comfortable design.",
+                specs: ["Haptic Feedback", "Adaptive Triggers", "Integrated Mic", "USB-C Charging"]
+            },
+            {
+                name: "Odyssey Curved Gaming Monitor",
+                img: "images/gaming-monitor.png",
+                badge: "High-End Display",
+                desc: "Wrap your senses in action-packed curved display. The 1000R curved screen fills your peripheral vision and draws you right into the virtual cockpit.",
+                specs: ["240Hz Refresh", "1ms Response", "1000R Curve", "G-Sync Support"]
+            },
+            {
+                name: "G560 LIGHTSYNC PC Speakers",
+                img: "images/gaming-speakers.png",
+                badge: "Immersive Audio",
+                desc: "Experience new levels of intensity with full-spectrum RGB lighting that automatically reacts to in-game action, screen color, and audio cues.",
+                specs: ["LIGHTSYNC RGB", "240W Peak Power", "DTS Surround", "Bluetooth 4.1"]
+            },
+            {
+                name: "StreamCam Pro Live Camera",
+                img: "images/gaming-webcam.png",
+                badge: "Streaming Gear",
+                desc: "Take your content to the next level and share your passion. Featuring pristine 1080p image quality, smart auto-focusing, and dual front mics.",
+                specs: ["1080p 60FPS", "Auto-Focusing", "Dual Mics", "USB-C Interface"]
+            },
+            {
+                name: "G604 Lightspeed Wireless Mouse",
+                img: "images/hero_mouse_main.png",
+                badge: "Tactical Input",
+                desc: "Dual mode hyperfast scroll wheel, Hero 16K optical sensor, and 15 programmable controls engineered for tactical gameplay dominance.",
+                specs: ["Hero 16K Sensor", "15 Controls", "Lightspeed Wireless", "Dual-Mode Wheel"]
+            }
+        ];
+
+        const spotlightImg = document.getElementById('spotlight-img');
+        const showcaseTitle = document.getElementById('showcase-title');
+        const showcaseBadge = document.getElementById('showcase-badge');
+        const showcaseDesc = document.getElementById('showcase-desc');
+        const showcaseSpecs = document.getElementById('showcase-specs');
+        const productCards = document.querySelectorAll('.product-card');
+
+        productCards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (card.classList.contains('active')) return;
+                
+                const index = parseInt(card.getAttribute('data-index'));
+                const data = productsData[index];
+
+                // Remove active class from all cards and add to current
+                productCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+
+                // Animate spotlight transition
+                spotlightImg.classList.add('exit-left');
+                
+                setTimeout(() => {
+                    // Update content
+                    spotlightImg.src = data.img;
+                    showcaseTitle.textContent = data.name;
+                    showcaseBadge.textContent = data.badge;
+                    showcaseDesc.textContent = data.desc;
+                    
+                    // Update specs
+                    showcaseSpecs.innerHTML = '';
+                    data.specs.forEach(spec => {
+                        const tag = document.createElement('span');
+                        tag.className = 'spec-tag';
+                        tag.textContent = spec;
+                        showcaseSpecs.appendChild(tag);
+                    });
+
+                    // Prepare entrance from right
+                    spotlightImg.classList.remove('exit-left');
+                    spotlightImg.classList.add('enter-right');
+                    
+                    // Force repaint
+                    spotlightImg.offsetWidth;
+                    
+                    // Animate in
+                    spotlightImg.classList.remove('enter-right');
+                }, 300);
+            });
+        });
     </script>
 </body>
+
 </html>
