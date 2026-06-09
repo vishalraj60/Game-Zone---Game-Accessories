@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // Check admin access
   checkAdminAccess();
   
+  // Check login status
+  checkLoginStatus();
+  
   // Reset product data to load new products (temporary fix)
   if (localStorage.getItem('gamezone_products')) {
     const existingProducts = JSON.parse(localStorage.getItem('gamezone_products'));
@@ -43,8 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
     products.forEach(product => {
       const priceInfo = window.gameZoneData.calculateFinalPrice(product);
       const stockStatus = product.stock > 0 ? '' : '<div class="sold-out">Sold Out</div>';
-      const newBadge = product.id <= 2 ? '<div class="new-badge">New</div>' : '';
-      const saleBadge = priceInfo.discount > 15 ? '<span class="sale-badge">Hot</span>' : '';
+
       
       const productCard = document.createElement('div');
       productCard.className = 'card';
@@ -54,28 +56,30 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="card-image">
           <img src="${product.image}" alt="${product.name}">
           ${stockStatus}
-          ${newBadge}
-          ${saleBadge}
         </div>
         <div class="card-content">
-          <h4>${product.name}</h4>
-          <div class="price">
-            <span class="current-price product-price">₹${priceInfo.finalPrice.toLocaleString('en-IN')}</span>
-            ${priceInfo.finalPrice < product.originalPrice ? 
-              `<span class="original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>
-               <span class="discount-badge">-${priceInfo.discount}%</span>` : ''}
+          <div class="card-info-group">
+            <h4>${product.name}</h4>
+            <div class="price">
+              <span class="current-price product-price">₹${priceInfo.finalPrice.toLocaleString('en-IN')}</span>
+              ${priceInfo.finalPrice < product.originalPrice ? 
+                `<span class="original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>
+                 <span class="discount-badge">-${priceInfo.discount}%</span>` : ''}
+            </div>
           </div>
-          <button class="btn add-to-cart" onclick="addToCart('${product.name}', ${priceInfo.finalPrice}, ${product.id})" 
-                  ${product.stock <= 0 ? 'disabled' : ''}>
-            ${product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
-          </button>
-          <div class="button-row">
-            <button class="btn buy-now ${product.stock <= 0 ? 'disabled' : ''}" 
-                    onclick="buyNow(${product.id})" 
+          <div class="card-actions-group">
+            <button class="btn add-to-cart" onclick="addToCart('${product.name}', ${priceInfo.finalPrice}, ${product.id})" 
                     ${product.stock <= 0 ? 'disabled' : ''}>
-              Buy Now
+              ${product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
             </button>
-            <button class="btn view-details" onclick="viewProductDetails(${product.id})">View Details</button>
+            <div class="button-row">
+              <button class="btn buy-now ${product.stock <= 0 ? 'disabled' : ''}" 
+                      onclick="buyNow(${product.id})" 
+                      ${product.stock <= 0 ? 'disabled' : ''}>
+                Buy Now
+              </button>
+              <button class="btn view-details" onclick="viewProductDetails(${product.id})">View Details</button>
+            </div>
           </div>
         </div>
       `;
@@ -411,6 +415,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Category pill active state (shop navbar)
+  const shopCats = document.querySelectorAll('.shop-cat');
+  shopCats.forEach(btn => {
+    btn.addEventListener('click', function () {
+      shopCats.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
   const footerYear = document.getElementById('footerYear');
   if (footerYear) {
     footerYear.textContent = String(new Date().getFullYear());
@@ -421,8 +434,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const profileBtn = document.getElementById('profileBtn');
     const profileName = document.getElementById('profileName');
+    const headerLoginBtn = document.getElementById('headerLoginBtn');
+    const headerSignupBtn = document.getElementById('headerSignupBtn');
     
-    if (isLoggedIn && profileBtn) {
+    if (isLoggedIn) {
       const userData = localStorage.getItem('gamezone_user');
       if (userData) {
         const user = JSON.parse(userData);
@@ -430,12 +445,31 @@ document.addEventListener('DOMContentLoaded', function () {
           profileName.textContent = user.name.split(' ')[0]; // Show first name only
         }
       }
-      profileBtn.style.display = 'flex';
-    } else if (profileBtn) {
-      profileBtn.style.display = 'none';
+      if (profileBtn) profileBtn.style.display = 'flex';
+      if (headerLoginBtn) headerLoginBtn.style.display = 'none';
+      if (headerSignupBtn) headerSignupBtn.style.display = 'none';
+    } else {
+      if (profileBtn) profileBtn.style.display = 'none';
+      if (headerLoginBtn) headerLoginBtn.style.display = 'inline-block';
+      if (headerSignupBtn) headerSignupBtn.style.display = 'inline-block';
     }
     
     return isLoggedIn;
+  }
+
+  // Header background shift on scroll
+  const header = document.querySelector('header');
+  if (header) {
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    }
   }
 
   // Check admin access

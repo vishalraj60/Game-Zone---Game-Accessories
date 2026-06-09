@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
             margin: 0 auto;
             padding: 40px 20px;
             min-height: 100vh;
+            padding-top: 120px !important;
         }
 
         .cart-header {
@@ -248,42 +250,59 @@
         }
     </style>
 </head>
+
 <body>
     <div class="wrap">
+        <!-- Header -->
         <header>
-            <div class="brand">
-                <div class="logo">
-                    <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                        <circle class="orbit" cx="25" cy="25" r="15" fill="none" stroke="#071024" stroke-width="2" />
-                        <circle class="planet" cx="40" cy="25" r="3" fill="#071024" />
-                        <text x="25" y="32" font-size="20" font-weight="bold" text-anchor="middle" fill="#071024">GZ</text>
-                    </svg>
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="orbit" cx="25" cy="25" r="15" fill="none" stroke="var(--accent)"
+                                stroke-width="2" />
+                            <circle class="planet" cx="40" cy="25" r="3" fill="var(--accent)" />
+                            <text x="25" y="32" font-size="20" font-weight="bold" text-anchor="middle"
+                                fill="#ffffff">GZ</text>
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <h1>GameZone</h1>
+                        <p>Gaming Accessories</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 style="font-family: 'Pacifico', cursive">GameZone</h1>
-                    <p style="color: black;">Gaming Accessories</p>
+
+
+
+
+
+                <div class="auth-buttons">
+                    <!-- Profile Button -->
+                    <button class="profile-btn" id="profileBtn" aria-label="Profile" onclick="window.location.href='#'"
+                        style="display: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span class="profile-name" id="profileName">Profile</span>
+                    </button>
+
+                    <!-- Cart Button -->
+                    <button class="cart-btn" aria-label="Cart" onclick="window.location.href='cart.html'">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-badge">0</span>
+                    </button>
+
+                    <a href="login.html" class="btn-login" id="headerLoginBtn">Login</a>
+                    <a href="signup.html" class="btn-signup" id="headerSignupBtn">Sign Up</a>
                 </div>
             </div>
-
-            <div class="header-controls">
-              <button class="profile-btn" id="profileBtn" aria-label="Profile" onclick="window.location.href='user/profile.html'" style="display: none;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                <span class="profile-name" id="profileName">Profile</span>
-              </button>
-
-              <button class="cart-btn" aria-label="Cart" onclick="window.location.href='cart.html'">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-                <span class="cart-badge">0</span>
-            </button>
         </header>
 
         <main class="cart-page">
@@ -338,7 +357,7 @@
         // Render cart items
         function renderCart() {
             const cartItemsContainer = document.getElementById('cartItems');
-            
+
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = `
                     <div class="empty-cart">
@@ -402,7 +421,7 @@
         function updateCartBadge() {
             const cartBadge = document.querySelector('.cart-badge');
             const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
+
             if (cartBadge) {
                 cartBadge.textContent = totalCount;
                 if (totalCount > 0) {
@@ -419,7 +438,7 @@
                 const price = parseInt(item.price.replace('₹', '').replace(',', ''));
                 return sum + (price * item.quantity);
             }, 0);
-            
+
             const tax = Math.round(subtotal * 0.18); // 18% GST
             const total = subtotal + tax;
 
@@ -442,4 +461,5 @@
         document.addEventListener('DOMContentLoaded', initializeCart);
     </script>
 </body>
+
 </html>

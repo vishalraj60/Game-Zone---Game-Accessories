@@ -14,102 +14,75 @@
 
 <body>
   <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo">
-          <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-            <circle class="orbit" cx="25" cy="25" r="15" fill="none" stroke="#071024" stroke-width="2" />
-            <circle class="planet" cx="40" cy="25" r="3" fill="#071024" />
-            <text x="25" y="32" font-size="20" font-weight="bold" text-anchor="middle" fill="#071024">GZ</text>
+
+    <!-- Unified Navbar (Search + Categories) -->
+    <header class="shop-navbar" id="shopNavbar">
+      <div class="shop-navbar-inner">
+        <!-- Logo (same as login page) -->
+        <a href="landingpage.html" class="shop-logo-link" aria-label="GameZone Home">
+          <div class="logo-section">
+            <div class="logo">
+              <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                <circle class="orbit" cx="25" cy="25" r="15" fill="none" stroke="var(--accent)" stroke-width="2" />
+                <circle class="planet" cx="40" cy="25" r="3" fill="var(--accent)" />
+                <text x="25" y="32" font-size="20" font-weight="bold" text-anchor="middle" fill="#ffffff">GZ</text>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <h1>GameZone</h1>
+              <p>Gaming Accessories</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Search -->
+        <div class="shop-search">
+          <svg class="shop-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
           </svg>
-        </div>
-        <div>
-          <h1 style="font-family: 'Pacifico', cursive">GameZone</h1>
-          <p style="color: black;">Gaming Accessories</p>
-        </div>
-      </div>
-
-      <div class="search">
-        <input type="text" id="searchInput" placeholder="Search accessories..." />
-        <button class="clear-btn" id="clearSearch"
-          onclick="document.getElementById('searchInput').value=''; this.classList.remove('visible');">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-
-      <div class="controls">
-        <!-- Categories moved here -->
-        <div class="categories">
-          <div class="glow-category">
-            <span>All</span>
-            <div class="dropdown">
-              <button>Keyboards</button>
-              <button>Headsets</button>
-              <button>Controllers</button>
-              <button>Mouse</button>
-            </div>
-          </div>
-
-          <div class="glow-category">
-            <span>Keyboards</span>
-            <div class="dropdown">
-              <button>Mechanical</button>
-              <button>Membrane</button>
-            </div>
-          </div>
-
-          <div class="glow-category">
-            <span>Headsets</span>
-            <div class="dropdown">
-              <button>Wired</button>
-              <button>Wireless</button>
-            </div>
-          </div>
-
-          <div class="glow-category">
-            <span>Controllers</span>
-            <div class="dropdown">
-              <button>Xbox</button>
-              <button>PlayStation</button>
-              <button>Switch</button>
-            </div>
-          </div>
-
-          <div class="glow-category">
-            <span>Mouse</span>
-            <div class="dropdown">
-              <button>Wired</button>
-              <button>Wireless</button>
-              <button>RGB</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="header-controls">
-          <button class="profile-btn" id="profileBtn" aria-label="Profile" onclick="window.location.href='user/profile.html'" style="display: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
+          <input type="text" id="searchInput" placeholder="Search accessories..." autocomplete="off" />
+          <button class="shop-search-clear" id="clearSearch"
+            onclick="document.getElementById('searchInput').value=''; this.classList.remove('visible');">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
-            <span class="profile-name" id="profileName">Profile</span>
           </button>
+        </div>
 
-          <button class="cart-btn" aria-label="Cart" onclick="window.location.href='cart.html'">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        <!-- Category Pills -->
+        <nav class="shop-cats" aria-label="Product categories">
+          <button class="shop-cat active" data-cat="all">All</button>
+          <button class="shop-cat" data-cat="keyboards">Keyboards</button>
+          <button class="shop-cat" data-cat="headsets">Headsets</button>
+          <button class="shop-cat" data-cat="controllers">Controllers</button>
+          <button class="shop-cat" data-cat="mouse">Mouse</button>
+        </nav>
+
+        <!-- Cart (end of navbar) -->
+        <button class="cart-btn shop-cart-end" aria-label="Cart" onclick="window.location.href='cart.html'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="20" cy="21" r="1" />
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
           </svg>
           <span class="cart-badge">0</span>
         </button>
 
+        <!-- Profile (hidden until logged in) -->
+        <button class="profile-btn" id="profileBtn" aria-label="Profile" onclick="window.location.href='#'"
+          style="display:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span class="profile-name" id="profileName">Profile</span>
+        </button>
       </div>
-
     </header>
 
 
@@ -165,7 +138,7 @@
       </div>
     </section>
 
-    
+
 
 
 
@@ -193,7 +166,7 @@
     <div id="buyNowModal" class="buy-now-modal" style="display: none;">
       <div class="buy-now-content">
         <button class="buy-now-close" onclick="closeBuyNowModal()">&times;</button>
-        
+
         <div class="buy-now-header">
           <h2>Complete Your Purchase</h2>
           <p>Review your order and proceed to checkout</p>
@@ -260,7 +233,7 @@
           <button class="btn buy-checkout-btn" onclick="proceedToCheckout()">
             <span>Proceed to Checkout</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
           <button class="btn buy-add-cart-btn" onclick="addToCartFromBuySection()">
@@ -277,7 +250,8 @@
         <div class="footer-brand">
           <div class="footer-title">GameZone</div>
           <div class="footer-subtitle">Gaming Accessories</div>
-          <p class="footer-desc">Premium gear for competitive play. Upgrade your setup with keyboards, headsets, controllers, and more.</p>
+          <p class="footer-desc">Premium gear for competitive play. Upgrade your setup with keyboards, headsets,
+            controllers, and more.</p>
         </div>
 
         <div class="footer-col">
@@ -298,10 +272,10 @@
 
         <div class="footer-col">
           <div class="footer-heading">Account</div>
-          <a href="user/login.html" class="footer-link">Login</a>
-          <a href="user/signup.html" class="footer-link">Sign Up</a>
-          <a href="user/profile.html" class="footer-link">My Profile</a>
-          <a href="admin/admin-login.html" class="footer-link">Admin</a>
+          <a href="login.html" class="footer-link">Login</a>
+          <a href="signup.html" class="footer-link">Sign Up</a>
+          <a href="#" class="footer-link">My Profile</a>
+          <a href="admin-login.html" class="footer-link">Admin</a>
         </div>
 
         <div class="footer-col">
@@ -331,4 +305,5 @@
     }
   </script>
 </body>
+
 </html>

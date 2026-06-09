@@ -40,6 +40,7 @@ A comprehensive e-commerce platform for gaming accessories with dual-role system
 - **Shopping Cart** - Persistent cart across sessions
 - **Checkout Process** - Multi-step checkout with address selection
 - **Order Tracking** - Real-time order status updates
+- **API Integration** - Fetch real product data and images from external APIs
 
 ###  **Modern UI/UX Design**
 - Dark theme optimized for gaming aesthetics
@@ -90,6 +91,7 @@ Login → Role Detection → Redirect to Dashboard
 
 ### Prerequisites
 - Any modern web browser (Chrome, Firefox, Safari, Edge)
+- Internet connection (for API integration)
 - No build tools or dependencies required!
 
 ### Installation
@@ -109,6 +111,11 @@ Login → Role Detection → Redirect to Dashboard
    open index.html
    # or simply double-click index.html
    ```
+
+4. **🆕 Setup API Integration (Optional)**
+   - Open `api-control.html` in your browser
+   - Click "Load Products from API" to fetch real product data
+   - See [API-INTEGRATION.md](API-INTEGRATION.md) for detailed guide
 
 ###  Login Credentials
 
@@ -132,8 +139,13 @@ e-commerce/
 ├── cart.html               # Shopping cart
 ├── product.html            # Product details page
 ├── landingpage.html        # Landing page
+├── api-control.html        # API control panel
+├── test-api.html           # API testing page
 ├── style.css               # Global styles
 ├── script.js               # JavaScript functionality
+├── data-manager.js         # Data management system
+├── api-integration.js      # API integration module
+├── API-INTEGRATION.md      # API documentation
 ├── admin/                  # Admin panel files
 │   ├── admin.html          # Admin dashboard
 │   └── admin-login.html    # Admin login page
@@ -253,6 +265,8 @@ This project is free to use for personal and educational purposes.
 ##  Acknowledgments
 
 - Product images from [Pexels](https://www.pexels.com/)
+- API integration with [DummyJSON](https://dummyjson.com)
+- Additional images from [Unsplash](https://unsplash.com)
 - Font from [Google Fonts](https://fonts.google.com/)
 - Design inspired by modern gaming aesthetics
 
